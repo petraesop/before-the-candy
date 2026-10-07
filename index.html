@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Before the Candy: The Real Story of Halloween</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@500;700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    --bg: #ECE7F0;
+    --panel: #E1D8E8;
+    --ink: #2A1A33;
+    --muted: #5B4A68;
+    --amber: #A9560A;
+    --violet: #6E428A;
+    --line: rgba(42, 26, 51, 0.18);
+    --right: #2F6B3A;
+    --wrong: #A3352B;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1E1326;
+      --panel: #2A1C35;
+      --ink: #F0E8F5;
+      --muted: #BBA9C8;
+      --amber: #F2A03D;
+      --violet: #C09AE0;
+      --line: rgba(240, 232, 245, 0.16);
+      --right: #8FD19E;
+      --wrong: #FF9C8F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1E1326;
+    --panel: #2A1C35;
+    --ink: #F0E8F5;
+    --muted: #BBA9C8;
+    --amber: #F2A03D;
+    --violet: #C09AE0;
+    --line: rgba(240, 232, 245, 0.16);
+    --right: #8FD19E;
+    --wrong: #FF9C8F;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { height: 100%; scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Alegreya Sans", "Gill Sans", "Segoe UI", system-ui, sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 36rem; margin: 0 auto; padding: 0 1.25rem 2.5rem; }
+  img, svg { max-width: 100%; }
+  h1, h2 {
+    font-family: "Grenze Gotisch", "Palatino Linotype", Georgia, serif;
+    font-weight: 700;
+    line-height: 1.02;
+    margin: 0;
+  }
+  h2 { font-size: 2.4rem; color: var(--violet); margin-bottom: 1.1rem; }
+  h3 { font-size: 1.2rem; margin: 0 0 0.3rem; line-height: 1.25; }
+  p { margin: 0 0 1rem; }
+  section { padding: 2.75rem 0; border-top: 1px solid var(--line); }
+  button { font: inherit; }
+  :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 1.25rem 0 2.25rem; }
+  .scene {
+    display: block; width: 100%; padding: 0; border: 0; margin: 0;
+    background: #120A1A; border-radius: 22px; overflow: hidden; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .scene svg { display: block; width: 100%; height: auto; }
+  .scene .glow { opacity: 0; transition: opacity 0.9s ease; }
+  .scene .eye { fill: #3A2149; transition: fill 0.5s ease; }
+  .scene.lit .glow { opacity: 1; }
+  .scene.lit .eye { fill: #FFC062; }
+  .scene .tap-ring { fill: none; stroke: #FFC062; stroke-width: 2; opacity: 0.8; transform-origin: 180px 206px; }
+  .scene.lit .tap-ring { display: none; }
+  .hint { text-align: center; color: var(--muted); font-size: 1rem; margin: 0.7rem 0 1.6rem; min-height: 1.5em; }
+  h1 { font-size: clamp(2.9rem, 13vw, 4.3rem); }
+  .lede { font-size: 1.25rem; color: var(--muted); margin: 1rem 0 0; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .bat { animation: drift 5s ease-in-out infinite; }
+    .bat.b2 { animation-duration: 6.5s; animation-delay: -2s; }
+    .bat.b3 { animation-duration: 4.4s; animation-delay: -1s; }
+    .scene .tap-ring { animation: ping 2.2s ease-out infinite; }
+    .scene.lit .flame-flicker { animation: flicker 2.8s ease-in-out infinite; }
+  }
+  @keyframes drift { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(8px, -7px); } }
+  @keyframes ping { 0% { transform: scale(0.8); opacity: 0.9; } 100% { transform: scale(1.5); opacity: 0; } }
+  @keyframes flicker { 0%, 100% { opacity: 1; } 35% { opacity: 0.78; } 42% { opacity: 0.96; } 70% { opacity: 0.84; } }
+
+  /* ---------- Journey (where it began) ---------- */
+  .journey-title { font-size: clamp(3rem, 14vw, 4rem); }
+  .journey-sub { font-size: 1.2rem; color: var(--muted); margin-bottom: 1.4rem; }
+  .journey { display: flex; flex-direction: column; }
+  .jscene { background: var(--panel); border-radius: 22px; overflow: hidden; border: 1px solid var(--line); }
+  .jscene + .jscene { margin-top: 2.6rem; position: relative; }
+  .jscene + .jscene::before {
+    content: ""; position: absolute; left: 50%; top: -2.6rem; height: 2.6rem;
+    border-left: 3px dotted var(--amber); transform: translateX(-1.5px);
+  }
+  .jscene.home { border: 2px solid var(--amber); }
+  .scene-art { position: relative; }
+  .scene-art svg { display: block; width: 100%; height: auto; }
+  .era {
+    position: absolute; top: 12px; left: 12px; background: rgba(20, 10, 28, 0.82); color: #F2A03D;
+    font-weight: 800; font-size: 0.95rem; border-radius: 999px; padding: 0.25rem 0.75rem;
+  }
+  .scene-body { padding: 1rem 1.15rem 1.3rem; }
+  .scene-body h3 { font-family: "Grenze Gotisch", Georgia, serif; font-size: 2rem; line-height: 1.05; margin: 0 0 0.5rem; color: var(--ink); }
+  .scene-body p { margin: 0; }
+  .stamp {
+    display: inline-block; margin-top: 0.9rem; padding: 0.25rem 0.8rem;
+    border: 2px solid var(--amber); color: var(--amber); border-radius: 999px;
+    font-weight: 800; font-size: 0.95rem; transform: rotate(-2deg);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .jscene .flick { animation: flicker 2.6s ease-in-out infinite; }
+    .jscene .wisp { animation: drift 6s ease-in-out infinite; }
+    .jscene .wisp.w2 { animation-duration: 7.5s; animation-delay: -3s; }
+    .jscene .sparks { animation: rise 2.4s ease-out infinite; }
+    .jscene .bob { animation: bob 3.4s ease-in-out infinite; transform-origin: 30px 40px; }
+    .jscene .sway { animation: sway 2.8s ease-in-out infinite; transform-origin: 12px 40px; }
+    .jscene .sway.s2 { animation-delay: -1.2s; }
+  }
+  @keyframes rise { 0% { transform: translateY(6px); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateY(-14px); opacity: 0; } }
+  @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(3px) rotate(1.5deg); } }
+  @keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+
+  /* ---------- Then and now ---------- */
+  .nw { white-space: nowrap; }
+  .versus { display: grid; grid-template-columns: 1fr 40px 1fr; align-items: center; gap: 0.25rem; margin: 0.5rem 0 1.5rem; }
+  .versus figure { margin: 0; text-align: center; }
+  .versus figure svg { width: 100%; max-width: 130px; height: auto; }
+  .versus figcaption { font-size: 0.98rem; color: var(--muted); line-height: 1.35; }
+  .versus figcaption strong { display: block; color: var(--ink); font-size: 1.15rem; }
+  .versus .arrow { width: 40px; height: 40px; color: var(--amber); }
+  .souling { display: grid; grid-template-columns: 72px 1fr; gap: 1rem; align-items: start; background: var(--panel); border-radius: 16px; padding: 1.1rem; }
+  .souling svg { width: 72px; height: 72px; }
+  .souling p { margin: 0; }
+
+  /* ---------- World / passport ---------- */
+  .passport-bar { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; background: var(--panel); border-radius: 14px; padding: 0.7rem 0.9rem; margin-bottom: 1rem; }
+  .pb-label { font-weight: 800; }
+  .stamps { display: flex; gap: 5px; }
+  .stamps i { width: 16px; height: 16px; border-radius: 50%; border: 2px dashed var(--muted); transition: background 0.3s; }
+  .stamps i.on { background: var(--amber); border: 2px solid var(--amber); }
+  .pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+  .pcard { display: block; width: 100%; padding: 0; margin: 0; border: 0; background: none; color: inherit; text-align: left; cursor: pointer; perspective: 900px; font: inherit; border-radius: 18px; -webkit-tap-highlight-color: transparent; }
+  .pinner { display: grid; transition: transform 0.6s cubic-bezier(.3,.7,.3,1); transform-style: preserve-3d; }
+  .pcard.flipped .pinner { transform: rotateY(180deg); }
+  .face { grid-area: 1 / 1; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 18px; padding: 0.85rem; display: flex; flex-direction: column; min-height: 14.5rem; }
+  .front { background: var(--panel); }
+  .back { background: #150C1D; color: #F0E8F5; transform: rotateY(180deg); box-shadow: inset 0 0 0 2px #F2A03D; }
+  .top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.4rem; }
+  .flag { width: 54px; height: 36px; border-radius: 4px; box-shadow: 0 0 0 1px var(--line), 0 2px 4px rgba(0,0,0,0.15); flex-shrink: 0; }
+  .art { width: 64px; height: 64px; }
+  .pname { display: block; font-weight: 800; font-size: 1.1rem; line-height: 1.2; }
+  .pcountry { display: block; color: var(--amber); font-weight: 700; font-size: 0.9rem; margin-top: 0.15rem; }
+  .ptease { display: block; margin-top: 0.5rem; font-size: 0.98rem; line-height: 1.35; color: var(--muted); font-style: italic; }
+  .tap { display: block; margin-top: auto; padding-top: 0.6rem; font-size: 0.85rem; color: var(--violet); }
+  .pwhen { display: block; color: #F2A03D; font-weight: 800; font-size: 0.95rem; margin-bottom: 0.35rem; }
+  .pback { display: block; font-size: 0.95rem; line-height: 1.4; color: #DCCDE8; }
+  .smark { align-self: flex-end; margin-top: auto; width: 64px; height: 64px; border: 3px double #F2A03D; border-radius: 50%; display: grid; place-content: center; text-align: center; color: #F2A03D; font-weight: 800; font-size: 0.62rem; line-height: 1.1; transform: rotate(-14deg); padding: 4px; }
+  .smark span { font-size: 0.8rem; }
+  @media (prefers-reduced-motion: no-preference) {
+    .pcard.flipped .smark { animation: thump 0.45s 0.35s ease-out both; }
+  }
+  @keyframes thump { 0% { transform: rotate(-14deg) scale(1.8); opacity: 0; } 100% { transform: rotate(-14deg) scale(1); opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .pinner { transition: none; } }
+  .passport-done { margin: 1rem 0 0; font-weight: 800; color: var(--amber); text-align: center; }
+  @media (max-width: 340px) { .pgrid { grid-template-columns: 1fr; } }
+
+  /* ---------- Prize banner ---------- */
+  .quiz-title { font-size: clamp(3rem, 14vw, 4rem); }
+  .quiz-sub { font-size: 1.2rem; color: var(--muted); }
+  .prize-banner { display: grid; grid-template-columns: 88px 1fr; gap: 0.9rem; align-items: center; background: #F2A03D; color: #2A1A33; border-radius: 20px; padding: 1.1rem; margin: 0 0 1.1rem; box-shadow: 0 6px 0 #B85A10; }
+  .prize-banner svg { width: 88px; height: auto; }
+  .prize-banner .pb-big { font-family: "Grenze Gotisch", Georgia, serif; font-size: 2.2rem; line-height: 1; margin: 0 0 0.35rem; }
+  .prize-banner p { margin: 0 0 0.5rem; font-size: 1rem; line-height: 1.4; }
+  .email { display: inline-block; font-weight: 800; background: #2A1A33; color: #F2A03D; padding: 0.15rem 0.5rem; border-radius: 8px; word-break: break-all; user-select: all; -webkit-user-select: all; }
+  .slots { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .slots span { background: #2A1A33; color: #F0E8F5; font-weight: 800; font-size: 0.85rem; padding: 0.15rem 0.6rem; border-radius: 999px; }
+
+  /* ---------- Ribbon ---------- */
+  .ribbon {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+    display: flex; justify-content: space-between; align-items: center; gap: 0.6rem;
+    text-decoration: none; font-weight: 800; font-size: 0.95rem;
+    background: #F2A03D; color: #2A1A33; border-radius: 999px;
+    padding: 0.45rem 0.5rem 0.45rem 0.95rem; margin-top: 0.75rem;
+    box-shadow: 0 4px 14px rgba(20, 10, 28, 0.25);
+  }
+  .rb-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rb-cd { flex-shrink: 0; background: #2A1A33; color: #F2A03D; border-radius: 999px; padding: 0.15rem 0.65rem; font-variant-numeric: tabular-nums; }
+
+  /* ---------- Quiz ---------- */
+  .quiz { border: 1px solid rgba(240, 232, 245, 0.12); background: #2A1C35; color: #F0E8F5; border-radius: 20px; padding: 1.4rem 1.25rem 1.5rem; position: relative; overflow: hidden; }
+  .quiz .moon { position: absolute; right: -28px; top: -28px; width: 110px; height: 110px; opacity: 0.3; pointer-events: none; }
+  .quiz > *:not(.moon) { position: relative; z-index: 1; }
+  .rules { color: #DCCDE8; margin: 0 0 1.2rem; padding-right: 3rem; }
+  .rules strong { color: #F2A03D; }
+  .big-btn {
+    width: 100%; padding: 0.95rem; border-radius: 14px; border: 0; cursor: pointer;
+    background: #F2A03D; color: #2A1A33; font-weight: 800; font-size: 1.15rem;
+  }
+  .big-btn.light { background: #F0E8F5; }
+  .big-btn:disabled { opacity: 0.5; cursor: default; }
+  .progress-track { display: flex; gap: 6px; margin-bottom: 1.1rem; padding-right: 3.5rem; }
+  .progress-track span { flex: 1; height: 6px; border-radius: 3px; background: rgba(240, 232, 245, 0.18); }
+  .progress-track span.done { background: #F2A03D; }
+  .progress-track span.now { background: #C09AE0; }
+  .statement { font-size: 1.4rem; font-weight: 700; line-height: 1.3; min-height: 3.6em; margin: 0 0 1.2rem; }
+  .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .choices button {
+    padding: 0.9rem 0.5rem; border-radius: 14px; border: 2px solid rgba(240, 232, 245, 0.35);
+    background: transparent; color: #F0E8F5; font-weight: 800; font-size: 1.15rem; cursor: pointer;
+  }
+  .choices button[data-answer="fact"] { background: #F2A03D; border-color: #F2A03D; color: #2A1A33; }
+  .choices button:disabled { cursor: default; opacity: 0.4; }
+  .choices button.picked { opacity: 1; outline: 3px solid #F0E8F5; outline-offset: 2px; }
+  .feedback { margin-top: 1.1rem; }
+  .verdict { font-weight: 800; font-size: 1.15rem; margin: 0 0 0.3rem; }
+  .verdict.yes { color: #8FD19E; }
+  .verdict.no { color: #FF9C8F; }
+  .why { margin: 0 0 1rem; color: #DCCDE8; }
+  .locked-note { font-size: 0.9rem; color: #BBA9C8; margin: 0.8rem 0 0; }
+  .result .score { font-family: "Grenze Gotisch", Georgia, serif; font-size: 4.5rem; line-height: 1; color: #F2A03D; margin: 0.2rem 0 0.4rem; }
+  .result .result-msg { color: #F0E8F5;  font-size: 1.25rem; font-weight: 700; margin: 0 0 1rem; }
+  .result p { color: #DCCDE8; }
+  .result a { color: #F2A03D; font-weight: 800; }
+  .prize {
+    border: 2px dashed #F2A03D; border-radius: 16px; padding: 1rem 1rem 1.1rem; margin: 1.2rem 0 0;
+  }
+  .prize h3 { color: #F2A03D; font-size: 1.25rem; margin-bottom: 0.4rem; }
+  .prize p { margin: 0 0 0.9rem; }
+  .prize label { display: block; font-weight: 700; margin-bottom: 0.35rem; color: #F0E8F5; }
+  .prize input {
+    width: 100%; padding: 0.8rem 0.9rem; border-radius: 12px; border: 2px solid rgba(240, 232, 245, 0.35);
+    background: #1E1326; color: #F0E8F5; font: inherit; margin-bottom: 0.75rem;
+  }
+  .card-img { display: block; width: 100%; border-radius: 14px; margin: 0.4rem 0 0.9rem; }
+  .save-hint { font-size: 0.95rem; color: #BBA9C8; margin: 0.6rem 0 0; }
+  [hidden] { display: none !important; }
+  #confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
+
+  /* ---------- Stage transition ---------- */
+  .stage-wrap { margin-inline: -1.25rem; padding: 0 0 1.4rem; border-top: 0; background: #0E0714; text-align: center; margin-top: 2.5rem; }
+  .stage { position: relative; height: 270px; overflow: hidden; background: radial-gradient(ellipse 60% 70% at 50% 55%, #4A2A5C 0%, #1E1326 55%, #0E0714 100%); }
+  .sign { position: absolute; left: 50%; top: 56%; transform: translate(-50%, -50%); width: min(300px, 84%); height: auto; }
+  .sign .bl.a { opacity: 1; } .sign .bl.b { opacity: 0.35; }
+  .curtain { position: absolute; top: 0; bottom: 0; width: 52%; z-index: 2; transition: transform 1.8s cubic-bezier(.65, 0, .25, 1); }
+  .curtain svg { display: block; width: 100%; height: 100%; }
+  .curtain.left { left: 0; }
+  .curtain.right { right: 0; }
+  .curtain.right svg { transform: scaleX(-1); }
+  .stage.open .curtain.left { transform: translateX(-80%); }
+  .stage.open .curtain.right { transform: translateX(80%); }
+  .valance { position: absolute; top: 0; left: 0; width: 100%; height: 36px; z-index: 3; }
+  .stage-line { color: #F0E8F5; font-size: 1.2rem; line-height: 1.45; margin: 1.2rem auto 0.4rem; padding: 0 1.4rem; max-width: 26rem; }
+  .stage-line strong { color: #F2A03D; }
+  .chev { width: 34px; height: 20px; display: block; margin: 0.4rem auto 0; }
+  .irl { display: inline-flex; align-items: center; gap: 0.5rem; background: #C2402F; color: #FFFFFF; font-weight: 800; font-size: 0.95rem; border-radius: 999px; padding: 0.3rem 0.85rem 0.3rem 0.7rem; margin-top: 0.6rem; }
+  .irl-dot { width: 10px; height: 10px; border-radius: 50%; background: #FFFFFF; }
+  .event-wrap { padding-top: 0 !important; }
+  @media (prefers-reduced-motion: no-preference) {
+    .sign .bl.a { animation: chase 1s steps(1) infinite; }
+    .sign .bl.b { animation: chase 1s steps(1) infinite reverse; }
+    .chev { animation: nudge 1.6s ease-in-out infinite; }
+    .irl-dot { animation: pulse 1.4s ease-in-out infinite; }
+  }
+  @media (prefers-reduced-motion: reduce) { .curtain { transition: none; } }
+  @keyframes chase { 0% { opacity: 1; } 50% { opacity: 0.3; } }
+  @keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.7); } }
+
+  /* ---------- Event ---------- */
+  .event-wrap { border-top: 0; padding-top: 2rem; margin-inline: -1.25rem; }
+  .drips { display: block; width: 100%; height: 34px; background: #2A1C35; }
+  .event { background: #2A1C35; color: #F0E8F5; padding: 0.5rem 1.25rem 2.5rem; }
+  .ev-pre { color: #C09AE0; font-weight: 700; margin: 0.5rem 0 0.3rem; }
+  .event-head { display: grid; grid-template-columns: minmax(0, 1fr) 88px; align-items: center; gap: 0.5rem; }
+  .event h2 { color: #F2A03D; font-size: clamp(3.2rem, 15vw, 5rem); margin: 0; line-height: 0.9; }
+  .event-head svg { width: 88px; height: auto; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .chips span { background: #F0E8F5; color: #2A1A33; font-weight: 800; border-radius: 999px; padding: 0.3rem 0.85rem; }
+  .countdown { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.5rem; margin: 1.4rem 0 0.4rem; }
+  .countdown div { background: #1E1326; border-radius: 14px; padding: 0.75rem 0.2rem; text-align: center; border: 1px solid rgba(240, 232, 245, 0.1); }
+  .countdown b { display: block; font-family: "Grenze Gotisch", Georgia, serif; font-size: 2.4rem; line-height: 1; color: #F0E8F5; font-variant-numeric: tabular-nums; }
+  .countdown small { color: #BBA9C8; font-size: 0.85rem; }
+  .cd-label { color: #BBA9C8; font-size: 0.95rem; margin: 0; text-align: center; }
+  .acts-intro { font-family: "Grenze Gotisch", Georgia, serif; font-size: 1.9rem; color: #F0E8F5; margin: 2rem 0 0.25rem; line-height: 1.1; }
+  .act { background: #1E1326; border-radius: 20px; padding: 1.1rem 1.1rem 1.25rem; margin-top: 1rem; border: 2px solid rgba(240, 232, 245, 0.08); }
+  .act.is-live { border-color: #F2A03D; box-shadow: 0 0 0 5px rgba(242, 160, 61, 0.18); }
+  .act-top { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+  .act-no { font-family: "Grenze Gotisch", Georgia, serif; font-size: 1.7rem; color: #F2A03D; line-height: 1; }
+  .act-time { font-weight: 800; font-size: 0.9rem; background: rgba(240, 232, 245, 0.1); border-radius: 999px; padding: 0.15rem 0.6rem; }
+  .act .live { display: none; font-weight: 800; font-size: 0.85rem; background: #F2A03D; color: #2A1A33; border-radius: 999px; padding: 0.15rem 0.6rem; }
+  .act.is-live .live { display: inline-block; }
+  .act h3 { font-size: 1.45rem; margin: 0.6rem 0 0.5rem; }
+  .act p { color: #DCCDE8; margin: 0 0 0.9rem; }
+  .tower-wrap { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 1rem; align-items: center; }
+  .tower { width: 120px; height: auto; display: block; }
+  .tower .floor rect { fill: #1A0F22; }
+  @media (prefers-reduced-motion: no-preference) {
+    .tower .floor rect { animation: lightup 9s infinite; }
+    .tower .f2 rect { animation-delay: 1.5s; } .tower .f3 rect { animation-delay: 3s; }
+    .tower .f4 rect { animation-delay: 4.5s; } .tower .f5 rect { animation-delay: 6s; }
+    .tower .f6 rect { animation-delay: 7.5s; }
+  }
+  @media (prefers-reduced-motion: reduce) { .tower .floor rect { fill: #F2A03D; } }
+  @keyframes lightup { 0%, 15% { fill: #FFC062; } 18%, 100% { fill: #1A0F22; } }
+  .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.4rem; }
+  .facts div { background: #2A1C35; border-radius: 12px; padding: 0.5rem 0.2rem; text-align: center; }
+  .facts b { display: block; font-family: "Grenze Gotisch", Georgia, serif; font-size: 1.9rem; line-height: 1; color: #F2A03D; }
+  .facts span { font-size: 0.78rem; color: #BBA9C8; line-height: 1.2; display: block; }
+  .menu { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
+  .mtile { border-radius: 16px; padding: 0.8rem; color: #2A1A33; display: flex; flex-direction: column; gap: 0.35rem; min-height: 7.5rem; }
+  .mtile svg { width: 56px; height: 56px; }
+  .mtile span { font-weight: 800; line-height: 1.2; }
+  .ecc-wrap { border-radius: 14px; overflow: hidden; margin: 0.2rem 0 0.9rem; }
+  .ecc { display: block; width: 100%; height: auto; }
+  .treats { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .treats span { background: #2A1C35; color: #F0E8F5; font-weight: 800; font-size: 0.9rem; border-radius: 999px; padding: 0.25rem 0.75rem; border: 1px solid rgba(242, 160, 61, 0.45); }
+  @media (prefers-reduced-motion: no-preference) {
+    .ecc .bulb { animation: twinkle 1.8s ease-in-out infinite; }
+    .ecc .screen-ghost { animation: haunt 7s ease-in-out infinite; }
+    .ecc .sc1 { animation: sc1 7s ease-out infinite; }
+    .ecc .sc2 { animation: sc2 7s ease-out infinite; }
+    .ecc .sc3 { animation: sc3 7s ease-out infinite; }
+    .ecc .sc4 { animation: sc4 7s ease-out infinite; }
+    .ecc .hop { animation: hop 1.6s ease-in-out infinite; }
+    .ecc .hop.h2 { animation-delay: 0.4s; } .ecc .hop.h3 { animation-delay: 0.8s; }
+    .ecc .bub { animation: bubble 2.2s ease-in infinite; }
+    .ecc .bub.b2 { animation-delay: 0.7s; } .ecc .bub.b3 { animation-delay: 1.4s; }
+    .ecc .sway-guest { animation: guest 3s ease-in-out infinite; transform-origin: 154px 200px; }
+  }
+  @keyframes twinkle { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+  @keyframes haunt { 0% { transform: translate(0, 0); } 50% { transform: translate(86px, -8px); } 100% { transform: translate(0, 0); } }
+  @keyframes sc1 { 0% { opacity: 0; transform: translateY(-34px); } 6%, 85% { opacity: 1; transform: translateY(0); } 92%, 100% { opacity: 0; transform: translateY(0); } }
+  @keyframes sc2 { 0%, 14% { opacity: 0; transform: translateY(-34px); } 20%, 85% { opacity: 1; transform: translateY(0); } 92%, 100% { opacity: 0; transform: translateY(0); } }
+  @keyframes sc3 { 0%, 28% { opacity: 0; transform: translateY(-34px); } 34%, 85% { opacity: 1; transform: translateY(0); } 92%, 100% { opacity: 0; transform: translateY(0); } }
+  @keyframes sc4 { 0%, 42% { opacity: 0; transform: translateY(-34px); } 48%, 85% { opacity: 1; transform: translateY(0); } 92%, 100% { opacity: 0; transform: translateY(0); } }
+  @keyframes hop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+  @keyframes bubble { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 0.9; } 100% { transform: translateY(-22px); opacity: 0; } }
+  @keyframes guest { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+  .closer { font-family: "Grenze Gotisch", Georgia, serif; font-size: 2.2rem; color: #C09AE0; text-align: center; margin: 2rem 0 0; line-height: 1.05; }
+
+  footer { text-align: center; color: var(--muted); font-size: 0.95rem; padding-top: 2rem; }
+</style>
+</head>
+<body>
+<main>
+
+  <a class="ribbon" id="ribbon" href="#iscream">
+    <span class="rb-text">🍦 I&#8209;Scream House in</span>
+    <span class="rb-cd" id="rbCd">--</span>
+  </a>
+
+  <!-- HERO -->
+  <header class="hero">
+    <button class="scene" id="lantern" aria-pressed="false" aria-label="Light the turnip lantern">
+      <svg viewBox="0 0 360 300" aria-hidden="true">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#110918"/>
+            <stop offset="1" stop-color="#3B2149"/>
+          </linearGradient>
+          <radialGradient id="glowGrad">
+            <stop offset="0" stop-color="#F7A94A" stop-opacity="0.85"/>
+            <stop offset="0.5" stop-color="#E8871E" stop-opacity="0.3"/>
+            <stop offset="1" stop-color="#E8871E" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="360" height="300" fill="url(#sky)"/>
+        <g fill="#F3E9C9">
+          <circle cx="30" cy="30" r="1.4"/><circle cx="85" cy="18" r="1"/><circle cx="130" cy="44" r="1.3"/>
+          <circle cx="200" cy="22" r="1"/><circle cx="235" cy="58" r="1.4"/><circle cx="20" cy="96" r="1"/>
+          <circle cx="150" cy="96" r="0.9"/><circle cx="335" cy="126" r="1.2"/><circle cx="250" cy="120" r="0.9"/>
+          <circle cx="60" cy="140" r="1.1"/>
+        </g>
+        <circle cx="292" cy="64" r="32" fill="#F3E9C9"/>
+        <circle cx="281" cy="55" r="5.5" fill="#E2D5AE"/>
+        <circle cx="303" cy="77" r="7.5" fill="#E2D5AE"/>
+        <circle cx="300" cy="50" r="3" fill="#E2D5AE"/>
+        <g transform="translate(66 74)"><g class="bat">
+          <path d="M0 0 C6 -9 13 -9 17 -2 C19 -6 22 -7 24 -3 C26 -7 29 -6 31 -2 C35 -9 42 -9 48 0 C40 -3 35 1 31 4 C28 2 20 2 17 4 C13 1 8 -3 0 0Z" fill="#0A0510"/>
+        </g></g>
+        <g transform="translate(204 104) scale(0.7)"><g class="bat b2">
+          <path d="M0 0 C6 -9 13 -9 17 -2 C19 -6 22 -7 24 -3 C26 -7 29 -6 31 -2 C35 -9 42 -9 48 0 C40 -3 35 1 31 4 C28 2 20 2 17 4 C13 1 8 -3 0 0Z" fill="#0A0510"/>
+        </g></g>
+        <g transform="translate(118 132) scale(0.55)"><g class="bat b3">
+          <path d="M0 0 C6 -9 13 -9 17 -2 C19 -6 22 -7 24 -3 C26 -7 29 -6 31 -2 C35 -9 42 -9 48 0 C40 -3 35 1 31 4 C28 2 20 2 17 4 C13 1 8 -3 0 0Z" fill="#0A0510"/>
+        </g></g>
+        <path d="M0 226 C70 204 140 212 196 220 C256 229 312 206 360 214 L360 300 L0 300Z" fill="#1C1025"/>
+        <g fill="#140B1B">
+          <path d="M30 222 L32 186 Q38 180 44 186 L46 220Z"/>
+          <path d="M54 218 L55 176 Q62 168 70 176 L72 216Z"/>
+          <path d="M80 216 L82 190 Q88 184 94 190 L95 214Z"/>
+          <path d="M290 214 L292 182 Q299 176 306 182 L307 212Z"/>
+          <path d="M316 214 L318 194 Q323 189 329 194 L330 214Z"/>
+        </g>
+        <circle class="glow" cx="180" cy="214" r="120" fill="url(#glowGrad)"/>
+        <path d="M0 262 C90 250 270 254 360 266 L360 300 L0 300Z" fill="#0E0714"/>
+        <g transform="translate(128 152) scale(0.65)">
+          <path d="M80 34 C70 18 58 10 46 8 C56 16 64 24 70 36 Z" fill="#7E4C9C"/>
+          <path d="M82 34 C88 16 100 6 116 4 C104 14 96 24 90 38 Z" fill="#7E4C9C"/>
+          <path d="M80 36 C40 36 14 66 14 102 C14 140 44 164 80 164 C116 164 146 140 146 102 C146 66 120 36 80 36 Z" fill="#E8DFD2"/>
+          <path d="M80 36 C58 36 40 46 28 62 C46 52 64 48 80 48 C96 48 114 52 132 62 C120 46 102 36 80 36 Z" fill="#8C5BA8" opacity="0.6"/>
+          <path d="M118 74 C136 92 138 128 120 150 C136 136 144 118 144 102 C144 90 134 80 118 74 Z" fill="#BFB2A3"/>
+          <g class="flame-flicker">
+            <path class="eye" d="M44 92 L66 84 L60 106 Z"/>
+            <path class="eye" d="M116 92 L94 84 L100 106 Z"/>
+            <path class="eye" d="M46 124 L58 132 L68 122 L80 134 L92 122 L102 132 L114 124 L104 146 L56 146 Z"/>
+          </g>
+        </g>
+        <circle class="tap-ring" cx="180" cy="206" r="48"/>
+      </svg>
+    </button>
+    <p class="hint" id="hint" aria-live="polite">Tap the lantern to light it</p>
+    <h1>Halloween is 2,000 years older than candy.</h1>
+    <p class="lede">Before costumes and chocolate, it was a night for the dead. Here is how it became the Halloween we know.</p>
+  </header>
+
+  <!-- TIMELINE -->
+  <section aria-labelledby="began">
+    <h2 id="began" class="journey-title">Where it began</h2>
+    <p class="journey-sub">2,000 years of Halloween in four scenes.</p>
+    <div class="journey">
+      <article class="jscene">
+        <div class="scene-art">
+          <svg viewBox="0 0 360 210" role="img" aria-label="Celts in animal masks around a Samhain bonfire under a full moon, with spirits drifting overhead">
+          <defs>
+            <linearGradient id="s1sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0F0817"/><stop offset="1" stop-color="#3B2149"/></linearGradient>
+            <radialGradient id="s1glow"><stop offset="0" stop-color="#F7A94A" stop-opacity="0.75"/><stop offset="1" stop-color="#F7A94A" stop-opacity="0"/></radialGradient>
+          </defs>
+          <rect width="360" height="210" fill="url(#s1sky)"/>
+          <g fill="#F3E9C9"><circle cx="20" cy="20" r="1.2"/><circle cx="72" cy="38" r="1"/><circle cx="140" cy="16" r="1.3"/><circle cx="212" cy="30" r="1"/><circle cx="252" cy="62" r="1.2"/><circle cx="338" cy="92" r="1"/><circle cx="36" cy="96" r="1"/></g>
+          <circle cx="300" cy="42" r="22" fill="#F3E9C9"/><circle cx="292" cy="36" r="4" fill="#E2D5AE"/><circle cx="306" cy="50" r="5" fill="#E2D5AE"/>
+          <g transform="translate(52 52)"><g class="wisp"><path d="M0 18 C0 0 20 0 20 18 L20 34 L16 30 L12 34 L8 30 L4 34 L0 30 Z" fill="#F3EDF7" opacity="0.4"/><circle cx="7" cy="15" r="1.6" fill="#1C1025"/><circle cx="13" cy="15" r="1.6" fill="#1C1025"/></g></g>
+          <g transform="translate(222 44) scale(0.75)"><g class="wisp w2"><path d="M0 18 C0 0 20 0 20 18 L20 34 L16 30 L12 34 L8 30 L4 34 L0 30 Z" fill="#F3EDF7" opacity="0.32"/><circle cx="7" cy="15" r="1.6" fill="#1C1025"/><circle cx="13" cy="15" r="1.6" fill="#1C1025"/></g></g>
+          <path d="M0 150 C60 130 120 138 180 142 C250 146 300 128 360 136 L360 210 L0 210 Z" fill="#1C1025"/>
+          <g fill="#140B1B"><path d="M14 148 L16 116 Q22 110 28 116 L30 146 Z"/><path d="M38 146 L39 104 Q46 96 54 104 L56 144 Z"/><path d="M314 140 L316 112 Q322 106 328 112 L330 138 Z"/><path d="M336 140 L337 120 Q342 115 347 120 L348 138 Z"/></g>
+          <circle cx="180" cy="160" r="96" fill="url(#s1glow)"/>
+          <path d="M0 186 C100 176 260 178 360 188 L360 210 L0 210 Z" fill="#0E0714"/>
+          <g transform="translate(110 134)"><path d="M-12 52 L-6 10 Q0 2 6 10 L12 52 Z" fill="#140B1B"/><path d="M-12 52 L-6 10 Q0 2 6 10" fill="none" stroke="#E8871E" stroke-opacity="0.45" stroke-width="1.5"/><ellipse cx="0" cy="0" rx="7" ry="8.5" fill="#E8DFD2"/><ellipse cx="-2.6" cy="-1" rx="1.6" ry="2.2" fill="#0E0714"/><ellipse cx="2.6" cy="-1" rx="1.6" ry="2.2" fill="#0E0714"/><path d="M-5 -6 Q-13 -15 -8 -23 M5 -6 Q13 -15 8 -23" stroke="#E8DFD2" stroke-width="2.6" fill="none" stroke-linecap="round"/></g>
+          <g transform="translate(254 134)"><path d="M-12 52 L-6 10 Q0 2 6 10 L12 52 Z" fill="#140B1B"/><path d="M6 10 L12 52" fill="none" stroke="#E8871E" stroke-opacity="0.45" stroke-width="1.5"/><ellipse cx="0" cy="0" rx="7" ry="8.5" fill="#C9B9A6"/><path d="M-7 -3 L-10 -15 L-2 -8 Z M7 -3 L10 -15 L2 -8 Z" fill="#C9B9A6"/><ellipse cx="-2.6" cy="-1" rx="1.6" ry="2.2" fill="#0E0714"/><ellipse cx="2.6" cy="-1" rx="1.6" ry="2.2" fill="#0E0714"/><path d="M-2 4 L0 6 L2 4" stroke="#0E0714" stroke-width="1" fill="none"/></g>
+          <g transform="translate(78 150) scale(0.68)"><path d="M-12 52 L-6 10 Q0 2 6 10 L12 52 Z" fill="#140B1B"/><path d="M6 10 L12 52" fill="none" stroke="#E8871E" stroke-opacity="0.45" stroke-width="1.5"/><ellipse cx="0" cy="0" rx="7" ry="8.5" fill="#C9B9A6"/><path d="M-7 -3 L-10 -15 L-2 -8 Z M7 -3 L10 -15 L2 -8 Z" fill="#C9B9A6"/><ellipse cx="-2.6" cy="-1" rx="1.6" ry="2.2" fill="#0E0714"/><ellipse cx="2.6" cy="-1" rx="1.6" ry="2.2" fill="#0E0714"/><path d="M-2 4 L0 6 L2 4" stroke="#0E0714" stroke-width="1" fill="none"/></g>
+          <path d="M156 190 L204 178 M156 178 L204 190" stroke="#5A3A22" stroke-width="7" stroke-linecap="round"/>
+          <g class="flick">
+            <path d="M180 112 C196 132 206 146 206 162 C206 178 194 186 180 186 C166 186 154 178 154 162 C154 150 162 142 168 128 C172 138 172 144 176 150 C180 140 182 126 180 112 Z" fill="#E8871E"/>
+            <path d="M180 136 C190 150 194 158 194 168 C194 178 188 184 180 184 C172 184 166 178 166 168 C166 160 172 152 180 136 Z" fill="#F2A03D"/>
+            <path d="M180 156 C185 163 187 168 187 173 C187 179 184 182 180 182 C176 182 173 179 173 173 C173 168 175 163 180 156 Z" fill="#FFE2A0"/>
+          </g>
+          <g class="sparks" fill="#FFC062"><circle cx="170" cy="100" r="1.8"/><circle cx="193" cy="92" r="1.5"/><circle cx="184" cy="78" r="1.3"/></g>
+        </svg>
+          <span class="era">About 2,000 years ago</span>
+        </div>
+        <div class="scene-body">
+          <h3>Samhain fires</h3>
+          <p>The Celts of Ireland, Britain and northern France celebrated <strong>Samhain</strong> (say "SOW-in"), the end of the harvest and the start of winter. They believed the dead could cross back on October 31, so people lit bonfires and wore disguises to hide from spirits.</p>
+        </div>
+      </article>
+      <article class="jscene">
+        <div class="scene-art">
+          <svg viewBox="0 0 360 210" role="img" aria-label="Two calendar pages, October 31 and November 1, on either side of a candlelit chapel, showing All Hallows' Eve shortening to Hallowe'en">
+          <rect width="360" height="210" fill="#24162E"/>
+          <g fill="#F3E9C9" opacity="0.7"><circle cx="30" cy="18" r="1.1"/><circle cx="130" cy="12" r="1"/><circle cx="236" cy="16" r="1.2"/><circle cx="338" cy="24" r="1"/><circle cx="168" cy="196" r="1"/></g>
+          <g transform="translate(22 46) rotate(-6)">
+            <rect width="96" height="112" rx="8" fill="#F3EDE2"/>
+            <rect width="96" height="26" rx="8" fill="#6E428A"/><rect y="14" width="96" height="12" fill="#6E428A"/>
+            <text x="48" y="18" text-anchor="middle" font-size="12" font-weight="800" font-family="Alegreya Sans, sans-serif" fill="#F3EDE2">OCT</text>
+            <text x="48" y="74" text-anchor="middle" font-size="44" font-weight="700" font-family="Grenze Gotisch, Georgia, serif" fill="#2A1A33">31</text>
+            <circle cx="48" cy="94" r="9" fill="#BBA9C8"/><circle cx="52" cy="91" r="8" fill="#F3EDE2"/>
+          </g>
+          <g transform="translate(242 40) rotate(6)">
+            <rect width="96" height="112" rx="8" fill="#F3EDE2"/>
+            <rect width="96" height="26" rx="8" fill="#B85A10"/><rect y="14" width="96" height="12" fill="#B85A10"/>
+            <text x="48" y="18" text-anchor="middle" font-size="12" font-weight="800" font-family="Alegreya Sans, sans-serif" fill="#F3EDE2">NOV</text>
+            <text x="48" y="74" text-anchor="middle" font-size="44" font-weight="700" font-family="Grenze Gotisch, Georgia, serif" fill="#2A1A33">1</text>
+            <rect x="44" y="88" width="8" height="16" rx="1.5" fill="#FFFFFF" stroke="#BFB2A3" stroke-width="1"/>
+            <path class="flick" d="M48 77 C51 81 52 83 52 85 C52 87 50 88 48 88 C46 88 44 87 44 85 C44 83 45 81 48 77 Z" fill="#F2A03D"/>
+          </g>
+          <path d="M150 104 V66 L180 42 L210 66 V104 Z" fill="#4E2E60"/>
+          <path d="M144 68 L180 38 L216 68" fill="none" stroke="#6E428A" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M180 18 V36 M174 25 H186" stroke="#C09AE0" stroke-width="2.5" stroke-linecap="round"/>
+          <path class="flick" d="M172 104 V84 Q180 72 188 84 V104 Z" fill="#FFC062"/>
+          <rect x="136" y="104" width="88" height="3" rx="1.5" fill="#6E428A"/>
+          <text x="180" y="134" text-anchor="middle" font-size="13" font-family="Alegreya Sans, sans-serif" fill="#BBA9C8">All Hallows' Eve</text>
+          <path d="M174 143 L180 150 L186 143" stroke="#F2A03D" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="180" y="180" text-anchor="middle" font-size="30" font-weight="700" font-family="Grenze Gotisch, Georgia, serif" fill="#F2A03D">Hallowe'en</text>
+        </svg>
+          <span class="era">The 8th century</span>
+        </div>
+        <div class="scene-body">
+          <h3>A night gets its name</h3>
+          <p>The church named November 1 <strong>All Saints' Day</strong>, also called All Hallows. The night before became All Hallows' Eve, later shortened to Hallowe'en.</p>
+        </div>
+      </article>
+      <article class="jscene">
+        <div class="scene-art">
+          <svg viewBox="0 0 360 210" role="img" aria-label="A sailing ship with a turnip lantern on its bow crossing the ocean from Ireland and Scotland to North America at sunset">
+          <defs><linearGradient id="s3sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E1326"/><stop offset="0.6" stop-color="#6E428A"/><stop offset="1" stop-color="#E8871E"/></linearGradient></defs>
+          <rect width="360" height="142" fill="url(#s3sky)"/>
+          <circle cx="292" cy="142" r="26" fill="#F7B451"/>
+          <rect y="140" width="360" height="70" fill="#1B1838"/>
+          <path d="M296 142 C306 120 326 110 360 114 V146 H296 Z" fill="#2F5A36"/>
+          <g fill="#1C1025"><rect x="330" y="94" width="14" height="24"/><rect x="328" y="90" width="4" height="6"/><rect x="335" y="90" width="4" height="6"/><rect x="342" y="90" width="4" height="6"/></g>
+          <text x="356" y="80" text-anchor="end" font-size="11" font-weight="800" font-family="Alegreya Sans, sans-serif" fill="#F3EDF7">Ireland &amp; Scotland</text>
+          <path d="M0 116 C28 110 50 118 66 142 H0 Z" fill="#2F5A36"/>
+          <rect x="22" y="84" width="9" height="30" fill="#F3EDE2"/><rect x="22" y="92" width="9" height="5" fill="#C2402F"/><rect x="22" y="104" width="9" height="5" fill="#C2402F"/>
+          <path d="M20 84 L26.5 76 L33 84 Z" fill="#2A1A33"/>
+          <circle class="flick" cx="26.5" cy="80" r="8" fill="#FFC062" opacity="0.45"/>
+          <text x="6" y="66" font-size="11" font-weight="800" font-family="Alegreya Sans, sans-serif" fill="#F3EDF7">North America</text>
+          <path d="M292 150 C240 112 120 108 66 140" stroke="#F2A03D" stroke-width="2" stroke-dasharray="3 6" fill="none" stroke-linecap="round"/>
+          <g transform="translate(138 106)"><g class="bob">
+            <path d="M30 34 V-8" stroke="#3A2416" stroke-width="3"/>
+            <path d="M32 -6 L32 30 L60 28 Z" fill="#F3EDE2"/>
+            <path d="M28 -2 L28 30 L4 28 Z" fill="#D9CFC2"/>
+            <path d="M30 -8 L42 -4 L30 0 Z" fill="#5C6B3A"/>
+            <path d="M-4 34 L66 34 L58 50 L6 50 Z" fill="#5A3A22"/>
+            <path d="M-2 38 H62" stroke="#7A5232" stroke-width="2"/>
+            <circle cx="2" cy="24" r="13" fill="#F2A03D" opacity="0.35" class="flick"/>
+            <circle cx="2" cy="27" r="7" fill="#F1EADF"/>
+            <path d="M-2 21 Q2 15 6 21" fill="#7E4C9C"/>
+            <path d="M-1.5 26 L0.5 25 L0 27.5 Z M5.5 26 L3.5 25 L4 27.5 Z M-1.5 29.5 H5.5 L4 31.5 H0 Z" fill="#E8871E"/>
+          </g></g>
+          <path d="M0 160 C20 154 40 154 60 160 C80 166 100 166 120 160 C140 154 160 154 180 160 C200 166 220 166 240 160 C260 154 280 154 300 160 C320 166 340 166 360 160 V210 H0 Z" fill="#241F4A"/>
+          <path d="M10 178 C30 172 50 172 70 178 M120 184 C140 178 160 178 180 184 M240 176 C260 170 280 170 300 176" stroke="#6E428A" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M60 196 C80 190 100 190 120 196 M200 198 C220 192 240 192 260 198" stroke="#8C5BA8" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+        </svg>
+          <span class="era">The 1800s</span>
+        </div>
+        <div class="scene-body">
+          <h3>Halloween crosses the ocean</h3>
+          <p>Irish and Scottish immigrants brought the tradition with them to North America.</p>
+        </div>
+      </article>
+      <article class="jscene home">
+        <div class="scene-art">
+          <svg viewBox="0 0 360 210" role="img" aria-label="Children in a ghost sheet and a witch hat trick-or-treating at a prairie farmhouse beside a grain elevator, with a 1927 newspaper headline reading Trick or treat">
+          <defs><linearGradient id="s4sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E1326"/><stop offset="0.55" stop-color="#6E428A"/><stop offset="1" stop-color="#F2A03D"/></linearGradient></defs>
+          <rect width="360" height="156" fill="url(#s4sky)"/>
+          <circle cx="150" cy="34" r="12" fill="#F3E9C9"/><circle cx="156" cy="30" r="11" fill="#2A1C35"/>
+          <g fill="#F3E9C9"><circle cx="40" cy="22" r="1"/><circle cx="96" cy="44" r="1.1"/><circle cx="214" cy="20" r="1"/><circle cx="244" cy="48" r="1.2"/></g>
+          <rect y="152" width="360" height="58" fill="#8A6A2E"/>
+          <path d="M0 166 H360 M0 182 H360 M0 198 H360" stroke="#A5813A" stroke-width="2"/>
+          <rect x="288" y="62" width="34" height="92" fill="#7A2E2A"/>
+          <path d="M284 64 L305 44 L326 64 Z" fill="#5A201D"/>
+          <rect x="298" y="30" width="14" height="16" fill="#7A2E2A"/><path d="M296 31 L305 22 L314 31 Z" fill="#5A201D"/>
+          <rect x="322" y="104" width="26" height="50" fill="#6B2622"/><path d="M322 104 L348 96 V104 Z" fill="#5A201D"/>
+          <rect x="300" y="80" width="10" height="12" fill="#F3EDE2" opacity="0.25"/>
+          <path d="M28 108 L69 78 L110 108 Z" fill="#2A1A33"/>
+          <rect x="34" y="106" width="70" height="48" fill="#3B2149"/>
+          <rect class="flick" x="44" y="118" width="16" height="14" fill="#FFC062"/>
+          <path d="M52 118 V132 M44 125 H60" stroke="#3B2149" stroke-width="1.5"/>
+          <rect class="flick" x="76" y="122" width="16" height="32" fill="#FFC062"/>
+          <circle cx="100" cy="149" r="6" fill="#E8871E"/><path d="M97 147 L99 146 L98.5 148.5 Z M103 147 L101 146 L101.5 148.5 Z M97 151 H103" stroke="#2A1A33" stroke-width="1" fill="#2A1A33"/>
+          <g transform="translate(118 120)"><g class="sway">
+            <path d="M0 30 C0 0 24 0 24 30 L24 36 L20 33 L16 36 L12 33 L8 36 L4 33 L0 36 Z" fill="#F3EDF7"/>
+            <ellipse cx="8.5" cy="15" rx="2" ry="3" fill="#2A1A33"/><ellipse cx="15.5" cy="15" rx="2" ry="3" fill="#2A1A33"/>
+            <path d="M-6 24 H2 V32 C2 34 -6 34 -6 32 Z" fill="#E8871E"/>
+          </g></g>
+          <g transform="translate(150 106)"><g class="sway s2">
+            <path d="M8 18 L-4 50 L20 50 Z" fill="#6E428A"/>
+            <circle cx="8" cy="12" r="6.5" fill="#E8C9A6"/>
+            <path d="M-4 8 H20" stroke="#1A0F22" stroke-width="3" stroke-linecap="round"/>
+            <path d="M0 8 L10 -14 L16 8 Z" fill="#1A0F22"/>
+            <path d="M20 34 H28 V42 C28 44 20 44 20 42 Z" fill="#E8871E"/>
+          </g></g>
+          <g transform="translate(198 148) rotate(-5)">
+            <rect width="124" height="58" rx="3" fill="#F3EDE2" stroke="#BFB2A3" stroke-width="1"/>
+            <text x="8" y="12" font-size="9" font-weight="800" font-family="Alegreya Sans, sans-serif" fill="#2A1A33">1927</text>
+            <path d="M8 16 H116" stroke="#2A1A33" stroke-width="1"/>
+            <text x="62" y="34" text-anchor="middle" font-size="17" font-weight="700" font-family="Grenze Gotisch, Georgia, serif" fill="#A9560A">Trick or treat!</text>
+            <text x="62" y="45" text-anchor="middle" font-size="8" font-family="Alegreya Sans, sans-serif" fill="#5B4A68">Blackie, Alberta</text>
+            <path d="M10 51 H58 M66 51 H114" stroke="#BBA9C8" stroke-width="2"/>
+          </g>
+        </svg>
+          <span class="era">1927</span>
+        </div>
+        <div class="scene-body">
+          <h3>Trick or treat, Alberta!</h3>
+          <p>The words <strong>"trick or treat"</strong> first appeared in print in a Lethbridge Herald story about Halloween in Blackie, Alberta.</p>
+          <span class="stamp">Made in Alberta</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SYMBOLS -->
+  <section aria-labelledby="symbols">
+    <h2 id="symbols">The first <span class="nw">jack-o'-lantern</span> was a turnip</h2>
+    <div class="versus">
+      <figure>
+        <svg viewBox="0 0 160 170" aria-hidden="true">
+          <path d="M80 34 C70 18 58 10 46 8 C56 16 64 24 70 36 Z" fill="#7E4C9C"/>
+          <path d="M82 34 C88 16 100 6 116 4 C104 14 96 24 90 38 Z" fill="#7E4C9C"/>
+          <path d="M80 36 C40 36 14 66 14 102 C14 140 44 164 80 164 C116 164 146 140 146 102 C146 66 120 36 80 36 Z" fill="#E8DFD2"/>
+          <path d="M80 36 C58 36 40 46 28 62 C46 52 64 48 80 48 C96 48 114 52 132 62 C120 46 102 36 80 36 Z" fill="#8C5BA8" opacity="0.6"/>
+          <path d="M118 74 C136 92 138 128 120 150 C136 136 144 118 144 102 C144 90 134 80 118 74 Z" fill="#BFB2A3"/>
+          <path d="M44 92 L66 84 L60 106 Z" fill="#F2A03D"/>
+          <path d="M116 92 L94 84 L100 106 Z" fill="#F2A03D"/>
+          <path d="M46 124 L58 132 L68 122 L80 134 L92 122 L102 132 L114 124 L104 146 L56 146 Z" fill="#F2A03D"/>
+        </svg>
+        <figcaption><strong>Then</strong>Turnips and potatoes in Ireland</figcaption>
+      </figure>
+      <svg class="arrow" viewBox="0 0 40 40" aria-hidden="true"><path d="M6 24 C12 10 24 10 32 18 M32 18 L32 10 M32 18 L24 19" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <figure>
+        <svg viewBox="0 0 160 170" aria-hidden="true">
+          <path d="M76 40 C74 26 78 16 86 10 L92 14 C86 20 84 28 86 40Z" fill="#5C6B3A"/>
+          <ellipse cx="50" cy="104" rx="38" ry="58" fill="#D9741A"/>
+          <ellipse cx="110" cy="104" rx="38" ry="58" fill="#D9741A"/>
+          <ellipse cx="80" cy="104" rx="40" ry="62" fill="#E8871E"/>
+          <path d="M56 86 L72 78 L68 98 Z" fill="#3A2149"/>
+          <path d="M104 86 L88 78 L92 98 Z" fill="#3A2149"/>
+          <path d="M48 120 L60 128 L70 118 L80 130 L90 118 L100 128 L112 120 L102 142 L58 142 Z" fill="#3A2149"/>
+        </svg>
+        <figcaption><strong>Now</strong>Pumpkins in North America, bigger and easier to carve</figcaption>
+      </figure>
+    </div>
+    <div class="souling">
+      <svg viewBox="0 0 72 72" aria-hidden="true">
+        <circle cx="36" cy="38" r="28" fill="#C98A3E"/>
+        <circle cx="36" cy="38" r="22" fill="#DDA55A"/>
+        <path d="M36 18 V58 M16 38 H56" stroke="#A86E2A" stroke-width="4" stroke-linecap="round"/>
+        <g fill="#5A2E1A"><circle cx="26" cy="28" r="2.2"/><circle cx="47" cy="30" r="2.2"/><circle cx="27" cy="49" r="2.2"/><circle cx="46" cy="48" r="2.2"/></g>
+      </svg>
+      <div>
+        <h3>Trick-or-treating has older cousins</h3>
+        <p>In medieval Britain, "souling" meant going door to door and offering prayers for the dead in exchange for soul cakes. In Scotland and Ireland, children went "guising," performing a song or a joke for a treat.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORLD -->
+  <section aria-labelledby="world">
+    <h2 id="world">Around the world</h2>
+    <p>Many cultures set aside a time to remember the dead. Tap each card to stamp your passport.</p>
+    <div class="passport-bar">
+      <span class="pb-label">🛂 <span id="stampCount">0 of 6 stamps</span></span>
+      <span class="stamps" id="stamps" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+    <div class="pgrid">
+      <button type="button" class="pcard" aria-pressed="false" aria-label="Día de los Muertos, Mexico. Tap to flip.">
+        <span class="pinner">
+          <span class="face front">
+            <span class="top"><svg class="flag" viewBox="0 0 60 40" role="img" aria-label="Flag of Mexico"><rect width="20" height="40" fill="#006847"/><rect x="20" width="20" height="40" fill="#fff"/><rect x="40" width="20" height="40" fill="#CE1126"/><circle cx="30" cy="19" r="4.5" fill="#8C5A2B"/><path d="M25 22 Q30 28 35 22" stroke="#4A7A2B" stroke-width="1.4" fill="none"/></svg><svg class="art" viewBox="0 0 80 80" aria-hidden="true">
+          <path d="M40 58 C40 66 38 72 34 78" stroke="#5C6B3A" stroke-width="3" fill="none"/>
+          <ellipse cx="28" cy="68" rx="8" ry="3.5" fill="#5C6B3A" transform="rotate(-30 28 68)"/>
+          <g fill="#E8871E">
+            <circle cx="56" cy="36" r="10"/><circle cx="51.3" cy="47.3" r="10"/><circle cx="40" cy="52" r="10"/>
+            <circle cx="28.7" cy="47.3" r="10"/><circle cx="24" cy="36" r="10"/><circle cx="28.7" cy="24.7" r="10"/>
+            <circle cx="40" cy="20" r="10"/><circle cx="51.3" cy="24.7" r="10"/>
+          </g>
+          <circle cx="40" cy="36" r="13" fill="#F2A03D"/>
+          <circle cx="40" cy="36" r="6" fill="#B85A10"/>
+        </svg></span>
+            <span class="pname">Día de los Muertos</span>
+            <span class="pcountry">Mexico</span>
+            <span class="ptease">Marigolds light the way home.</span>
+            <span class="tap">Tap to visit</span>
+          </span>
+          <span class="face back">
+            <span class="pwhen">Nov 1 and 2</span>
+            <span class="pback">Families build ofrendas, altars with photos, favourite foods and bright orange marigolds, to welcome loved ones home for the night.</span>
+            <span class="smark"><span>Visited</span>Mexico</span>
+          </span>
+        </span>
+      </button>
+      <button type="button" class="pcard" aria-pressed="false" aria-label="Obon, Japan. Tap to flip.">
+        <span class="pinner">
+          <span class="face front">
+            <span class="top"><svg class="flag" viewBox="0 0 60 40" role="img" aria-label="Flag of Japan"><rect width="60" height="40" fill="#fff"/><circle cx="30" cy="20" r="12" fill="#BC002D"/></svg><svg class="art" viewBox="0 0 80 80" aria-hidden="true">
+          <circle cx="40" cy="40" r="26" fill="#F2A03D" opacity="0.25"/>
+          <path d="M24 26 L56 26 L52 20 L28 20 Z" fill="#7A5232"/>
+          <rect x="27" y="26" width="26" height="26" fill="#F7E3B5" stroke="#7A5232" stroke-width="2"/>
+          <path d="M40 26 V52" stroke="#7A5232" stroke-width="1.5"/>
+          <rect x="24" y="52" width="32" height="5" fill="#7A5232"/>
+          <path d="M6 64 C14 60 20 60 28 64 C36 68 44 68 52 64 C60 60 66 60 74 64" stroke="#8C5BA8" stroke-width="2.5" fill="none"/>
+          <path d="M14 72 C22 68 28 68 36 72 C44 76 52 76 60 72" stroke="#8C5BA8" stroke-width="2" fill="none" opacity="0.6"/>
+        </svg></span>
+            <span class="pname">Obon</span>
+            <span class="pcountry">Japan</span>
+            <span class="ptease">Lanterns float the spirits back.</span>
+            <span class="tap">Tap to visit</span>
+          </span>
+          <span class="face back">
+            <span class="pwhen">Mid-August</span>
+            <span class="pback">Families visit ancestors' graves and dance the Bon Odori. In many places, floating lanterns guide the spirits back at the end.</span>
+            <span class="smark"><span>Visited</span>Japan</span>
+          </span>
+        </span>
+      </button>
+      <button type="button" class="pcard" aria-pressed="false" aria-label="Chuseok, South Korea. Tap to flip.">
+        <span class="pinner">
+          <span class="face front">
+            <span class="top"><svg class="flag" viewBox="0 0 60 40" role="img" aria-label="Flag of South Korea"><defs><g id="kfS"><rect x="-4" y="-0.7" width="8" height="1.4"/></g><g id="kfB"><rect x="-4" y="-0.7" width="3.3" height="1.4"/><rect x="0.7" y="-0.7" width="3.3" height="1.4"/></g></defs><rect width="60" height="40" fill="#fff"/><g transform="translate(30 20) rotate(33.69)"><path d="M-10 0 A10 10 0 0 1 10 0Z" fill="#CD2E3A"/><path d="M-10 0 A10 10 0 0 0 10 0Z" fill="#0047A0"/><circle cx="-5" cy="0" r="5" fill="#CD2E3A"/><circle cx="5" cy="0" r="5" fill="#0047A0"/></g><g fill="#000"><g transform="translate(15.9 10.6) rotate(-56.31)"><use href="#kfS" y="-2.6"/><use href="#kfS"/><use href="#kfS" y="2.6"/></g><g transform="translate(44.1 29.4) rotate(-56.31)"><use href="#kfB" y="-2.6"/><use href="#kfB"/><use href="#kfB" y="2.6"/></g><g transform="translate(44.1 10.6) rotate(56.31)"><use href="#kfB" y="-2.6"/><use href="#kfS"/><use href="#kfB" y="2.6"/></g><g transform="translate(15.9 29.4) rotate(56.31)"><use href="#kfS" y="-2.6"/><use href="#kfB"/><use href="#kfS" y="2.6"/></g></g></svg><svg class="art" viewBox="0 0 80 80" aria-hidden="true">
+          <circle cx="40" cy="28" r="20" fill="#F3E9C9"/>
+          <circle cx="33" cy="22" r="4" fill="#E2D5AE"/><circle cx="47" cy="33" r="5" fill="#E2D5AE"/>
+          <ellipse cx="40" cy="66" rx="30" ry="7" fill="#BFB2A3"/>
+          <path d="M16 64 A10 10 0 0 1 36 64 Z" fill="#F2B8C6"/>
+          <path d="M31 62 A10 10 0 0 1 51 62 Z" fill="#C9E3B0"/>
+          <path d="M45 64 A10 10 0 0 1 65 64 Z" fill="#F3EDE2"/>
+        </svg></span>
+            <span class="pname">Chuseok</span>
+            <span class="pcountry">South Korea</span>
+            <span class="ptease">A harvest moon and rice cakes.</span>
+            <span class="tap">Tap to visit</span>
+          </span>
+          <span class="face back">
+            <span class="pwhen">Autumn harvest moon</span>
+            <span class="pback">Families honour their ancestors with charye, a table of food, and share songpyeon, little half-moon rice cakes.</span>
+            <span class="smark"><span>Visited</span>South Korea</span>
+          </span>
+        </span>
+      </button>
+      <button type="button" class="pcard" aria-pressed="false" aria-label="Undas, Philippines. Tap to flip.">
+        <span class="pinner">
+          <span class="face front">
+            <span class="top"><svg class="flag" viewBox="0 0 60 40" role="img" aria-label="Flag of the Philippines"><rect width="60" height="20" fill="#0038A8"/><rect y="20" width="60" height="20" fill="#CE1126"/><path d="M0 0 L34.6 20 L0 40Z" fill="#fff"/><circle cx="11.5" cy="20" r="4" fill="#FCD116"/><g fill="#FCD116"><circle cx="4" cy="5" r="1.4"/><circle cx="4" cy="35" r="1.4"/><circle cx="28.5" cy="20" r="1.4"/></g></svg><svg class="art" viewBox="0 0 80 80" aria-hidden="true">
+            <circle cx="40" cy="38" r="26" fill="#F2A03D" opacity="0.22"/>
+            <g fill="#F3EDE2" stroke="#8C7A6B" stroke-width="1.5">
+              <rect x="20" y="40" width="10" height="26" rx="2"/><rect x="35" y="32" width="10" height="34" rx="2"/><rect x="50" y="44" width="10" height="22" rx="2"/>
+            </g>
+            <g fill="#F2A03D">
+              <path d="M25 28 C28 32 29 35 29 36 C29 38 27 39 25 39 C23 39 21 38 21 36 C21 35 22 32 25 28Z"/>
+              <path d="M40 20 C43 24 44 27 44 28 C44 30 42 31 40 31 C38 31 36 30 36 28 C36 27 37 24 40 20Z"/>
+              <path d="M55 32 C58 36 59 39 59 40 C59 42 57 43 55 43 C53 43 51 42 51 40 C51 39 52 36 55 32Z"/>
+            </g>
+            <rect x="14" y="66" width="52" height="5" rx="2" fill="#8C7A6B"/>
+          </svg></span>
+            <span class="pname">Undas</span>
+            <span class="pcountry">Philippines</span>
+            <span class="ptease">A night at the cemetery, together.</span>
+            <span class="tap">Tap to visit</span>
+          </span>
+          <span class="face back">
+            <span class="pwhen">Nov 1 and 2</span>
+            <span class="pback">Families gather at cemeteries to clean and decorate graves, light candles, share food, and sometimes stay overnight.</span>
+            <span class="smark"><span>Visited</span>Philippines</span>
+          </span>
+        </span>
+      </button>
+      <button type="button" class="pcard" aria-pressed="false" aria-label="Giant Kite Festival, Guatemala. Tap to flip.">
+        <span class="pinner">
+          <span class="face front">
+            <span class="top"><svg class="flag" viewBox="0 0 60 40" role="img" aria-label="Flag of Guatemala"><rect width="20" height="40" fill="#4997D0"/><rect x="20" width="20" height="40" fill="#fff"/><rect x="40" width="20" height="40" fill="#4997D0"/><circle cx="30" cy="20" r="5.5" fill="none" stroke="#4A7A2B" stroke-width="1.6"/><circle cx="30" cy="19" r="2" fill="#4CA64C"/></svg><svg class="art" viewBox="0 0 80 80" aria-hidden="true">
+            <path d="M40 4 L66 32 L40 60 L14 32 Z" fill="#E8871E"/>
+            <path d="M40 4 L66 32 L40 32 Z" fill="#8C5BA8"/>
+            <path d="M40 32 L40 60 L14 32 Z" fill="#4CA64C"/>
+            <path d="M40 4 V60 M14 32 H66" stroke="#2A1A33" stroke-width="1.5"/>
+            <circle cx="40" cy="32" r="6" fill="#F3E9C9"/>
+            <path d="M40 60 C36 66 44 70 40 76" stroke="#C09AE0" stroke-width="2" fill="none"/>
+            <path d="M36 66 L44 68 M37 72 L43 74" stroke="#F2A03D" stroke-width="3" stroke-linecap="round"/>
+          </svg></span>
+            <span class="pname">Giant Kite Festival</span>
+            <span class="pcountry">Guatemala</span>
+            <span class="ptease">Kites bigger than a house.</span>
+            <span class="tap">Tap to visit</span>
+          </span>
+          <span class="face back">
+            <span class="pwhen">Nov 1</span>
+            <span class="pback">In towns like Sumpango, people fly giant handmade kites, some several metres wide, said to carry messages to the spirits.</span>
+            <span class="smark"><span>Visited</span>Guatemala</span>
+          </span>
+        </span>
+      </button>
+      <button type="button" class="pcard" aria-pressed="false" aria-label="Hungry Ghost Festival, East and Southeast Asia. Tap to flip.">
+        <span class="pinner">
+          <span class="face front">
+            <span class="top"><svg class="flag" viewBox="0 0 60 40" role="img" aria-label="Globe showing many countries"><rect width="60" height="40" fill="#2A1C35"/><g fill="none" stroke="#C09AE0" stroke-width="1.3"><circle cx="30" cy="20" r="13"/><ellipse cx="30" cy="20" rx="6" ry="13"/><path d="M17 20 H43 M19.5 13 H40.5 M19.5 27 H40.5"/></g></svg><svg class="art" viewBox="0 0 80 80" aria-hidden="true">
+          <path d="M30 22 C26 16 34 12 30 6 M40 20 C36 14 44 10 40 4 M50 22 C46 16 54 12 50 6" stroke="#BBA9C8" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <rect x="29" y="24" width="2.5" height="32" fill="#B85A10"/>
+          <rect x="39" y="22" width="2.5" height="34" fill="#B85A10"/>
+          <rect x="49" y="24" width="2.5" height="32" fill="#B85A10"/>
+          <g fill="#FFC062"><circle cx="30.2" cy="24" r="2.4"/><circle cx="40.2" cy="22" r="2.4"/><circle cx="50.2" cy="24" r="2.4"/></g>
+          <path d="M18 54 H62 L58 70 Q40 76 22 70 Z" fill="#8C5BA8"/>
+          <rect x="16" y="52" width="48" height="5" rx="2" fill="#6E428A"/>
+        </svg></span>
+            <span class="pname">Hungry Ghost Festival</span>
+            <span class="pcountry">East and Southeast Asia</span>
+            <span class="ptease">A whole month when ghosts roam.</span>
+            <span class="tap">Tap to visit</span>
+          </span>
+          <span class="face back">
+            <span class="pwhen">7th lunar month</span>
+            <span class="pback">Families leave food and paper offerings for wandering spirits. At some street shows, the front row is left empty for the ghosts.</span>
+            <span class="smark"><span>Visited</span>Asia</span>
+          </span>
+        </span>
+      </button>
+    </div>
+    <p class="passport-done" id="passportDone" hidden aria-live="polite">Passport complete. Six countries, one night for the spirits. 🌍</p>
+  </section>
+
+  <!-- QUIZ -->
+  <section aria-labelledby="quizTitle">
+    <h2 id="quizTitle" class="quiz-title">Myth or fact?</h2>
+    <p class="quiz-sub">Ten questions from everything above. Unlimited tries. A perfect score could win you a prize.</p>
+    <div class="prize-banner">
+      <svg viewBox="0 0 100 110" aria-hidden="true">
+        <path d="M18 40 C18 10 82 10 82 40" stroke="#2A1A33" stroke-width="4" fill="none"/>
+        <circle cx="34" cy="30" r="8" fill="#C09AE0"/><rect x="48" y="18" width="14" height="20" rx="4" fill="#8FD19E" transform="rotate(20 55 28)"/><circle cx="66" cy="32" r="7" fill="#F0E8F5"/>
+        <ellipse cx="28" cy="70" rx="22" ry="34" fill="#B85A10"/><ellipse cx="72" cy="70" rx="22" ry="34" fill="#B85A10"/>
+        <ellipse cx="50" cy="70" rx="26" ry="36" fill="#E8871E"/>
+        <rect x="14" y="36" width="72" height="8" rx="4" fill="#B85A10"/>
+        <path d="M34 62 L44 56 L42 70 Z M66 62 L56 56 L58 70 Z" fill="#2A1A33"/>
+        <path d="M32 80 L40 86 L46 80 L50 88 L54 80 L60 86 L68 80 L62 96 L38 96 Z" fill="#2A1A33"/>
+      </svg>
+      <div>
+        <p class="pb-big">Win a prize</p>
+        <p>Score 10/10, then email your score card to <span class="email">junhee1@ualberta.ca</span>. The first 3 people win.</p>
+        <div class="slots" aria-hidden="true"><span>1st</span><span>2nd</span><span>3rd</span></div>
+      </div>
+    </div>
+    <div class="quiz" id="quiz">
+      <svg class="moon" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#F3E9C9"/><circle cx="36" cy="40" r="8" fill="#E2D5AE"/><circle cx="62" cy="64" r="11" fill="#E2D5AE"/></svg>
+
+      <div id="intro">
+        <p class="rules"><strong>Retries are allowed,</strong> but answers lock once you tap them. Speed matters too: the prize goes to the first 3 perfect cards in the inbox.</p>
+        <button type="button" class="big-btn" id="start">Start the quiz</button>
+      </div>
+
+      <div id="play" hidden>
+        <div class="progress-track" id="track" aria-hidden="true"></div>
+        <p class="statement" id="statement" aria-live="polite"></p>
+        <div class="choices" id="choices">
+          <button type="button" data-answer="myth">Myth</button>
+          <button type="button" data-answer="fact">Fact</button>
+        </div>
+        <div class="feedback" id="feedback" hidden aria-live="polite">
+          <p class="verdict" id="verdict"></p>
+          <p class="why" id="why"></p>
+          <button type="button" class="big-btn light" id="next">Next question</button>
+        </div>
+      </div>
+
+      <div class="result" id="result" hidden aria-live="polite">
+        <p class="score" id="score"></p>
+        <p class="result-msg" id="resultMsg"></p>
+        <p id="resultSub"></p>
+        <button type="button" class="big-btn" id="retry" hidden>Try again</button>
+
+        <div class="prize" id="prize" hidden>
+          <h3>Claim your prize</h3>
+          <p>The first 3 residents to email their perfect score card to <span class="email">junhee1@ualberta.ca</span> win a prize.</p>
+          <div id="nameStep">
+            <label for="name">Your name for the card</label>
+            <input id="name" maxlength="28" autocomplete="name" placeholder="First and last name">
+            <button type="button" class="big-btn" id="make">Make my score card</button>
+          </div>
+          <div id="cardStep" hidden>
+            <img class="card-img" id="cardImg" alt="Your perfect score card">
+            <button type="button" class="big-btn" id="save" hidden>Download my score card</button>
+            <p class="save-hint" id="saveHint">Press and hold the image to save it, or take a screenshot.</p>
+            <button type="button" class="big-btn light" id="copyEmail" style="margin-top:0.9rem">Copy email address</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE TRANSITION -->
+  <section class="stage-wrap" aria-label="Curtain opening for I-Scream House">
+    <div class="stage" id="stage">
+      <svg class="sign" viewBox="0 0 300 150" aria-hidden="true">
+        <rect x="4" y="4" width="292" height="142" rx="16" fill="#1E1326" stroke="#F2A03D" stroke-width="3"/>
+        <g fill="#FFC062"><circle class="bl b" cx="16" cy="16" r="3.6"/><circle class="bl a" cx="32" cy="16" r="3.6"/><circle class="bl b" cx="48" cy="16" r="3.6"/><circle class="bl a" cx="64" cy="16" r="3.6"/><circle class="bl b" cx="80" cy="16" r="3.6"/><circle class="bl a" cx="96" cy="16" r="3.6"/><circle class="bl b" cx="112" cy="16" r="3.6"/><circle class="bl a" cx="128" cy="16" r="3.6"/><circle class="bl b" cx="144" cy="16" r="3.6"/><circle class="bl a" cx="160" cy="16" r="3.6"/><circle class="bl b" cx="176" cy="16" r="3.6"/><circle class="bl a" cx="192" cy="16" r="3.6"/><circle class="bl b" cx="208" cy="16" r="3.6"/><circle class="bl a" cx="224" cy="16" r="3.6"/><circle class="bl b" cx="240" cy="16" r="3.6"/><circle class="bl a" cx="256" cy="16" r="3.6"/><circle class="bl b" cx="272" cy="16" r="3.6"/><circle class="bl a" cx="284" cy="32" r="3.6"/><circle class="bl b" cx="284" cy="48" r="3.6"/><circle class="bl a" cx="284" cy="64" r="3.6"/><circle class="bl b" cx="284" cy="80" r="3.6"/><circle class="bl a" cx="284" cy="96" r="3.6"/><circle class="bl b" cx="284" cy="112" r="3.6"/><circle class="bl a" cx="284" cy="128" r="3.6"/><circle class="bl b" cx="268" cy="134" r="3.6"/><circle class="bl a" cx="252" cy="134" r="3.6"/><circle class="bl b" cx="236" cy="134" r="3.6"/><circle class="bl a" cx="220" cy="134" r="3.6"/><circle class="bl b" cx="204" cy="134" r="3.6"/><circle class="bl a" cx="188" cy="134" r="3.6"/><circle class="bl b" cx="172" cy="134" r="3.6"/><circle class="bl a" cx="156" cy="134" r="3.6"/><circle class="bl b" cx="140" cy="134" r="3.6"/><circle class="bl a" cx="124" cy="134" r="3.6"/><circle class="bl b" cx="108" cy="134" r="3.6"/><circle class="bl a" cx="92" cy="134" r="3.6"/><circle class="bl b" cx="76" cy="134" r="3.6"/><circle class="bl a" cx="60" cy="134" r="3.6"/><circle class="bl b" cx="44" cy="134" r="3.6"/><circle class="bl a" cx="28" cy="134" r="3.6"/><circle class="bl b" cx="16" cy="118" r="3.6"/><circle class="bl a" cx="16" cy="102" r="3.6"/><circle class="bl b" cx="16" cy="86" r="3.6"/><circle class="bl a" cx="16" cy="70" r="3.6"/><circle class="bl b" cx="16" cy="54" r="3.6"/><circle class="bl a" cx="16" cy="38" r="3.6"/></g>
+        <text x="150" y="46" text-anchor="middle" font-size="15" font-weight="800" letter-spacing="3" font-family="Alegreya Sans, sans-serif" fill="#C09AE0">NOW SHOWING</text>
+        <text x="150" y="92" text-anchor="middle" font-size="34" font-weight="700" font-family="Grenze Gotisch, Georgia, serif" fill="#F2A03D">I&#8209;Scream House</text>
+        <text x="150" y="119" text-anchor="middle" font-size="15" font-weight="800" font-family="Alegreya Sans, sans-serif" fill="#F0E8F5">Friday, Oct 30  |  5:00 PM</text>
+      </svg>
+      <div class="curtain left"><svg viewBox="0 0 100 260" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="velvetL" x1="0" y1="0" x2="1" y2="0"><stop offset="0.0" stop-color="#4E1229"/><stop offset="0.1" stop-color="#7A2244"/><stop offset="0.2" stop-color="#5E1834"/><stop offset="0.3" stop-color="#8A2C50"/><stop offset="0.4" stop-color="#4E1229"/><stop offset="0.5" stop-color="#7A2244"/><stop offset="0.6" stop-color="#5E1834"/><stop offset="0.7" stop-color="#8A2C50"/><stop offset="0.8" stop-color="#4E1229"/><stop offset="0.9" stop-color="#7A2244"/><stop offset="1.0" stop-color="#5E1834"/></linearGradient></defs><path d="M0 0 H100 V250 C92 256 84 244 75 252 C66 260 58 246 50 254 C42 262 33 246 25 254 C16 262 8 248 0 254 Z" fill="url(#velvetL)"/><path d="M96 0 V252" stroke="#F2A03D" stroke-width="2" opacity="0.5"/></svg></div>
+      <div class="curtain right"><svg viewBox="0 0 100 260" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="velvetR" x1="0" y1="0" x2="1" y2="0"><stop offset="0.0" stop-color="#4E1229"/><stop offset="0.1" stop-color="#7A2244"/><stop offset="0.2" stop-color="#5E1834"/><stop offset="0.3" stop-color="#8A2C50"/><stop offset="0.4" stop-color="#4E1229"/><stop offset="0.5" stop-color="#7A2244"/><stop offset="0.6" stop-color="#5E1834"/><stop offset="0.7" stop-color="#8A2C50"/><stop offset="0.8" stop-color="#4E1229"/><stop offset="0.9" stop-color="#7A2244"/><stop offset="1.0" stop-color="#5E1834"/></linearGradient></defs><path d="M0 0 H100 V250 C92 256 84 244 75 252 C66 260 58 246 50 254 C42 262 33 246 25 254 C16 262 8 248 0 254 Z" fill="url(#velvetR)"/><path d="M96 0 V252" stroke="#F2A03D" stroke-width="2" opacity="0.5"/></svg></div>
+      <svg class="valance" viewBox="0 0 360 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 H360 V22 C345 38 330 38 315 22 C300 38 285 38 270 22 C255 38 240 38 225 22 C210 38 195 38 180 22 C165 38 150 38 135 22 C120 38 105 38 90 22 C75 38 60 38 45 22 C30 38 15 38 0 22 Z" fill="#4E1229"/><path d="M0 22 C15 38 30 38 45 22 C60 38 75 38 90 22 C105 38 120 38 135 22 C150 38 165 38 180 22 C195 38 210 38 225 22 C240 38 255 38 270 22 C285 38 300 38 315 22 C330 38 345 38 360 22" fill="none" stroke="#F2A03D" stroke-width="2"/></svg>
+    </div>
+    <p class="stage-line"><strong>Story time is over.</strong> Now for the party.</p>
+    <svg class="chev" viewBox="0 0 40 24" aria-hidden="true"><path d="M6 6 L20 18 L34 6" stroke="#F2A03D" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </section>
+
+  <!-- EVENT -->
+  <section class="event-wrap" id="iscream" aria-labelledby="iscreamTitle">
+    <svg class="drips" viewBox="0 0 360 34" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 0 H360 V10 C350 10 348 26 340 26 C332 26 334 10 322 10 C306 10 304 18 296 18 C288 18 288 10 276 10 C262 10 260 30 250 30 C240 30 242 10 226 10 C212 10 210 16 202 16 C194 16 194 10 180 10 C166 10 164 28 154 28 C144 28 146 10 130 10 C118 10 116 20 108 20 C100 20 100 10 88 10 C76 10 74 32 64 32 C54 32 56 10 42 10 C30 10 28 18 20 18 C12 18 12 10 0 10 Z" fill="#F2A03D"/>
+    </svg>
+    <div class="event">
+      <p class="ev-pre">You know the history. Now come and get scared.</p>
+      <div class="event-head">
+        <h2 id="iscreamTitle">I&#8209;Scream House</h2>
+        <svg viewBox="0 0 120 160" aria-hidden="true">
+          <path d="M40 94 L80 94 L60 156 Z" fill="#D9A55B"/>
+          <path d="M46 104 L70 140 M74 104 L54 140 M52 96 L76 126 M68 96 L46 128" stroke="#B07E3A" stroke-width="2"/>
+          <path d="M26 94 C24 46 96 46 94 94 C90 100 86 92 82 100 C78 108 74 96 70 102 C66 110 62 96 58 104 C54 110 50 96 46 102 C42 108 38 94 34 100 C30 104 28 96 26 94Z" fill="#F3EDF7"/>
+          <ellipse cx="48" cy="72" rx="5" ry="7.5" fill="#2A1A33"/>
+          <ellipse cx="72" cy="72" rx="5" ry="7.5" fill="#2A1A33"/>
+          <ellipse cx="60" cy="88" rx="5" ry="7" fill="#2A1A33"/>
+          <path d="M60 52 C58 44 62 40 66 38" stroke="#A3352B" stroke-width="2" fill="none"/>
+          <circle cx="60" cy="52" r="5" fill="#C2402F"/>
+        </svg>
+      </div>
+      <div class="chips"><span>Friday, Oct 30</span><span>5:00 to 7:30 PM</span></div>
+
+      <div class="countdown" id="countdown" aria-label="Time until I-Scream House">
+        <div><b id="cdD">--</b><small>days</small></div>
+        <div><b id="cdH">--</b><small>hours</small></div>
+        <div><b id="cdM">--</b><small>min</small></div>
+        <div><b id="cdS">--</b><small>sec</small></div>
+      </div>
+      <p class="cd-label" id="cdLabel">until the doors open</p>
+
+      <p class="acts-intro">The night comes in two acts.</p>
+
+      <article class="act" id="act1">
+        <div class="act-top"><span class="act-no">Act I</span><span class="act-time">5:00 to 6:30 PM</span><span class="live">Happening now</span></div>
+        <h3>The trick-or-treat tower</h3>
+        <div class="tower-wrap">
+          <svg class="tower" viewBox="0 0 140 262" aria-hidden="true">
+          <rect x="26" y="34" width="100" height="216" fill="#3B2149" stroke="#56346B" stroke-width="2"/>
+          <rect x="20" y="26" width="112" height="10" rx="2" fill="#56346B"/>
+          <path d="M60 26 C60 12 92 12 92 26" fill="none" stroke="#56346B" stroke-width="3"/>
+          <circle cx="112" cy="10" r="7" fill="#F3E9C9"/>
+          <g class="floor f1"><text x="12" y="224" font-size="11" font-weight="800" font-family="Alegreya Sans, sans-serif" fill="#BBA9C8">1</text><rect x="38" y="212" width="20" height="16" rx="2"/><rect x="66" y="212" width="20" height="16" rx="2"/><rect x="94" y="212" width="20" height="16" rx="2"/></g>
+          <g class="floor f2"><text x="12" y="194" font-size="11" font-weight="800" font-family="Alegreya Sans, sans-serif" fill="#BBA9C8">2</text><rect x="38" y="182" width="20" height="16" rx="2"/><rect x="66" y="182" width="20" height="16" rx="2"/><rect x="94" y="182" width="20" height="16" rx="2"/></g>
+          <g class="floor f3"><text x="12" y="164" font-size="11" font-weight="800" font-family="Alegreya Sans, sans-serif" fill="#BBA9C8">3</text><rect x="38" y="152" width="20" height="16" rx="2"/><rect x="66" y="152" width="20" height="16" rx="2"/><rect x="94" y="152" width="20" height="16" rx="2"/></g>
+          <g class="floor f4"><text x="12" y="134" font-size="11" font-weight="800" font-family="Alegreya Sans, sans-serif" fill="#BBA9C8">4</text><rect x="38" y="122" width="20" height="16" rx="2"/><rect x="66" y="122" width="20" height="16" rx="2"/><rect x="94" y="122" width="20" height="16" rx="2"/></g>
+          <g class="floor f5"><text x="12" y="104" font-size="11" font-weight="800" font-family="Alegreya Sans, sans-serif" fill="#BBA9C8">5</text><rect x="38" y="92" width="20" height="16" rx="2"/><rect x="66" y="92" width="20" height="16" rx="2"/><rect x="94" y="92" width="20" height="16" rx="2"/></g>
+          <g class="floor f6"><text x="12" y="74" font-size="11" font-weight="800" font-family="Alegreya Sans, sans-serif" fill="#BBA9C8">6</text><rect x="38" y="62" width="20" height="16" rx="2"/><rect x="66" y="62" width="20" height="16" rx="2"/><rect x="94" y="62" width="20" height="16" rx="2"/></g>
+          <rect x="62" y="236" width="28" height="14" fill="#F2A03D"/>
+          <rect x="4" y="250" width="132" height="4" rx="2" fill="#56346B"/>
+        </svg>
+          <div>
+            <p>Trick-or-treat your way through all six floors, 15 minutes per floor. Bring a bag. You'll need it.</p>
+            <div class="facts">
+              <div><b>6</b><span>floors</span></div>
+              <div><b>15</b><span>min each</span></div>
+              <div><b>90</b><span>min of candy</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="act" id="act2">
+        <div class="act-top"><span class="act-no">Act II</span><span class="act-time">6:30 to 7:30 PM</span><span class="live">Happening now</span></div>
+        <h3>The I&#8209;Scream social in the ECC</h3>
+        <div class="ecc-wrap">
+        <svg class="ecc" viewBox="0 0 320 200" role="img" aria-label="A party room with string lights, a big screen showing a floating ghost, an ice cream cone stacking up scoops, a candy bowl, popcorn, bubbling mocktails, and costumed guests watching">
+          <defs><clipPath id="eccScreen"><rect x="96" y="40" width="128" height="70" rx="3"/></clipPath></defs>
+          <rect width="320" height="200" fill="#2A1C35"/>
+          <rect y="160" width="320" height="40" fill="#1A0F22"/>
+          <path d="M0 12 Q80 42 160 14 Q240 42 320 12" stroke="#56346B" stroke-width="1.5" fill="none"/>
+          <circle class="bulb" style="animation-delay:0.0s" cx="18" cy="19" r="3.5" fill="#FFC062"/><circle class="bulb" style="animation-delay:0.6s" cx="48" cy="27" r="3.5" fill="#C09AE0"/><circle class="bulb" style="animation-delay:1.2s" cx="80" cy="31" r="3.5" fill="#8FD19E"/><circle class="bulb" style="animation-delay:0.0s" cx="112" cy="27" r="3.5" fill="#FFC062"/><circle class="bulb" style="animation-delay:0.6s" cx="142" cy="20" r="3.5" fill="#C09AE0"/><circle class="bulb" style="animation-delay:1.2s" cx="178" cy="20" r="3.5" fill="#8FD19E"/><circle class="bulb" style="animation-delay:0.0s" cx="208" cy="27" r="3.5" fill="#FFC062"/><circle class="bulb" style="animation-delay:0.6s" cx="240" cy="31" r="3.5" fill="#C09AE0"/><circle class="bulb" style="animation-delay:1.2s" cx="272" cy="27" r="3.5" fill="#8FD19E"/><circle class="bulb" style="animation-delay:0.0s" cx="302" cy="19" r="3.5" fill="#FFC062"/>
+          <rect x="90" y="34" width="140" height="82" rx="6" fill="#0E0714" stroke="#56346B" stroke-width="3"/>
+          <g clip-path="url(#eccScreen)">
+            <rect x="96" y="40" width="128" height="70" fill="#1B1838"/>
+            <circle cx="198" cy="56" r="10" fill="#F3E9C9"/>
+            <path d="M96 98 C130 88 160 94 190 92 C210 90 220 96 224 96 V110 H96 Z" fill="#0E0714"/>
+            <path d="M110 98 L111 86 Q114 82 117 86 L118 98 Z M200 96 L201 88 Q203 85 206 88 L207 96 Z" fill="#0E0714"/>
+            <g class="screen-ghost"><g transform="translate(108 56)"><path d="M0 18 C0 0 20 0 20 18 L20 30 L16 27 L12 30 L8 27 L4 30 L0 27 Z" fill="#F3EDF7" opacity="0.9"/><circle cx="7" cy="14" r="1.6" fill="#1B1838"/><circle cx="13" cy="14" r="1.6" fill="#1B1838"/><ellipse cx="10" cy="20" rx="1.8" ry="2.4" fill="#1B1838"/></g></g>
+          </g>
+          <rect x="150" y="116" width="20" height="8" fill="#3B2149"/>
+          <rect x="10" y="140" width="300" height="8" rx="3" fill="#7A5232"/>
+          <path d="M10 148 H310 V164 C300 170 290 160 280 166 C270 172 260 160 250 166 C240 172 230 160 220 166 C210 172 200 160 190 166 C180 172 170 160 160 166 C150 172 140 160 130 166 C120 172 110 160 100 166 C90 172 80 160 70 166 C60 172 50 160 40 166 C30 172 20 160 10 166 Z" fill="#6E428A"/>
+          <path d="M40 112 L62 112 L51 140 Z" fill="#D9A55B"/>
+          <path d="M44 117 L56 133 M58 117 L48 133" stroke="#B07E3A" stroke-width="1.5"/>
+          <circle class="scoop sc1" cx="51" cy="105" r="10.5" fill="#F2B8C6"/>
+          <circle class="scoop sc2" cx="51" cy="91" r="10" fill="#F3EDF7"/>
+          <circle class="scoop sc3" cx="51" cy="78" r="9.5" fill="#8C5BA8"/>
+          <circle class="scoop sc4" cx="51" cy="66" r="3.8" fill="#C2402F"/>
+          <path d="M90 124 Q116 150 142 124 Z" fill="#8C5BA8"/>
+          <g class="hop h1"><circle cx="102" cy="121" r="5" fill="#F2A03D"/><path d="M95 118 L97 121 L95 124 Z M109 118 L107 121 L109 124 Z" fill="#E8871E"/></g>
+          <g class="hop h2"><circle cx="116" cy="118" r="5" fill="#8FD19E"/><path d="M109 115 L111 118 L109 121 Z M123 115 L121 118 L123 121 Z" fill="#5C9E6C"/></g>
+          <g class="hop h3"><path d="M130 124 V104" stroke="#F0E8F5" stroke-width="2"/><circle cx="130" cy="102" r="6" fill="#F2B8C6"/><path d="M130 102 m-3.5 0 a3.5 3.5 0 1 1 3.5 3.5" stroke="#C2402F" stroke-width="1.5" fill="none"/></g>
+          <path d="M184 140 L180 112 H210 L206 140 Z" fill="#F3EDE2"/>
+          <path d="M187 112 L189 140 M195 112 V140 M203 112 L201 140" stroke="#C2402F" stroke-width="3"/>
+          <g class="hop h2" fill="#FFF3D6"><circle cx="185" cy="110" r="5"/><circle cx="193" cy="106" r="5.5"/><circle cx="201" cy="109" r="5"/><circle cx="207" cy="112" r="4"/><circle cx="196" cy="112" r="4"/></g>
+          <path d="M232 104 H258 L254 140 H236 Z" fill="#F0E8F5" opacity="0.22" stroke="#F0E8F5" stroke-width="1.2"/>
+          <path d="M233.5 116 H256.5 L254 140 H236 Z" fill="#E8871E"/>
+          <path d="M251 94 L246 128" stroke="#F0E8F5" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M268 104 H294 L290 140 H272 Z" fill="#F0E8F5" opacity="0.22" stroke="#F0E8F5" stroke-width="1.2"/>
+          <path d="M269.5 114 H292.5 L290 140 H272 Z" fill="#8C5BA8"/>
+          <circle cx="294" cy="104" r="6" fill="#8FD19E" stroke="#5C9E6C" stroke-width="1.5"/>
+          <g fill="#FFFFFF" opacity="0.8">
+            <circle class="bub" cx="240" cy="136" r="1.6"/><circle class="bub b2" cx="246" cy="134" r="1.3"/><circle class="bub b3" cx="250" cy="137" r="1.5"/>
+            <circle class="bub b2" cx="276" cy="136" r="1.5"/><circle class="bub" cx="282" cy="134" r="1.3"/><circle class="bub b3" cx="286" cy="137" r="1.4"/>
+          </g>
+          <g fill="#0E0714">
+            <path d="M18 200 C18 182 50 182 50 200 Z"/><circle cx="34" cy="176" r="9"/>
+            <path d="M84 200 C84 182 116 182 116 200 Z"/><circle cx="100" cy="176" r="9"/><path d="M90 172 H110 M94 172 L100 154 L106 172 Z" stroke="#0E0714" stroke-width="3"/>
+            <path d="M206 200 C206 182 238 182 238 200 Z"/><circle cx="222" cy="176" r="9"/><path d="M214 171 L212 160 L219 168 Z M230 171 L232 160 L225 168 Z"/>
+            <path d="M268 200 C268 182 300 182 300 200 Z"/><circle cx="284" cy="176" r="9"/>
+          </g>
+          <g class="sway-guest"><path d="M140 200 C140 178 140 166 154 166 C168 166 168 178 168 200 Z" fill="#E9E1EE"/><ellipse cx="149" cy="176" rx="1.8" ry="2.6" fill="#0E0714"/><ellipse cx="159" cy="176" rx="1.8" ry="2.6" fill="#0E0714"/></g>
+        </svg>
+        </div>
+        <p>Then everyone heads to the ECC for the sweet part: ice cream, mocktails, candy and snacks, with spooky Halloween vibes on the big screen.</p>
+        <div class="treats"><span>Ice cream</span><span>Mocktails</span><span>Candy and snacks</span><span>Big screen</span></div>
+      </article>
+
+      <p class="closer">Bring your floor. Bring your appetite.</p>
+    </div>
+  </section>
+
+  <footer>A Floor 6 program by your RA, Peter</footer>
+</main>
+<canvas id="confetti" hidden aria-hidden="true"></canvas>
+<script>
+  // ---------- Lantern ----------
+  const lantern = document.getElementById('lantern');
+  const hint = document.getElementById('hint');
+  lantern.addEventListener('click', () => {
+    const lit = lantern.classList.toggle('lit');
+    lantern.setAttribute('aria-pressed', String(lit));
+    hint.textContent = lit ? "That's the original jack-o'-lantern: a carved turnip." : "Tap the lantern to light it";
+  });
+
+  // ---------- Storage (one try per device) ----------
+  const KEY = 'btc-quiz-v2';
+  function load() { try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch (e) { return null; } }
+  function save(st) { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
+
+  // ---------- Quiz ----------
+  const questions = [
+    { s: "Halloween started in the United States.", a: "myth", why: "It began about 2,000 years ago with Samhain, a Celtic festival in Ireland, Britain and northern France." },
+    { s: "Samhain marked the end of the harvest and the start of winter.", a: "fact", why: "October 31 was the turning point between harvest and winter." },
+    { s: "The name \"Halloween\" comes from All Hallows' Eve.", a: "fact", why: "All Hallows' Eve, the night before All Saints' Day, was shortened to Hallowe'en." },
+    { s: "The first jack-o'-lanterns were carved from pumpkins.", a: "myth", why: "They were turnips and potatoes in Ireland. Pumpkins took over in North America." },
+    { s: "Irish and Scottish immigrants brought Halloween to North America in the 1950s.", a: "myth", why: "They brought it in the 1800s." },
+    { s: "The words \"trick or treat\" were first printed in Alberta.", a: "fact", why: "A 1927 Lethbridge Herald story about Blackie, Alberta, is the earliest known use." },
+    { s: "Día de los Muertos is about fearing the dead.", a: "myth", why: "It's a celebration. Families build ofrendas to welcome loved ones home." },
+    { s: "During Obon in Japan, lanterns guide ancestors' spirits home.", a: "fact", why: "Lanterns light the way home, and in many places floating lanterns send the spirits back." },
+    { s: "At some Hungry Ghost Festival shows, the front row is left empty for ghosts.", a: "fact", why: "Those empty seats are saved for the spirits." },
+    { s: "In Guatemala, people fly tiny hand-sized kites for the spirits.", a: "myth", why: "The kites are giant. Some are several metres wide." }
+  ];
+  const TOTAL = questions.length;
+  let st = load() || { started: false, i: 0, score: 0, picked: null, done: false, name: '', code: '', ts: 0, tries: 0 };
+
+  const $ = id => document.getElementById(id);
+  const intro = $('intro'), play = $('play'), result = $('result');
+  const track = $('track'), statement = $('statement'), feedback = $('feedback');
+  const verdict = $('verdict'), why = $('why'), next = $('next');
+  const buttons = document.querySelectorAll('#choices button');
+
+  function drawTrack() {
+    track.innerHTML = '';
+    for (let n = 0; n < TOTAL; n++) {
+      const bar = document.createElement('span');
+      if (n < st.i || (n === st.i && st.picked)) bar.className = 'done';
+      else if (n === st.i) bar.className = 'now';
+      track.appendChild(bar);
+    }
+  }
+
+  function showQuestion() {
+    intro.hidden = true; result.hidden = true; play.hidden = false;
+    const q = questions[st.i];
+    drawTrack();
+    statement.textContent = q.s;
+    buttons.forEach(b => {
+      b.disabled = !!st.picked;
+      b.classList.toggle('picked', b.dataset.answer === st.picked);
+    });
+    if (st.picked) {
+      const right = st.picked === q.a;
+      verdict.textContent = (right ? "You got it. " : "Not quite. ") + "It's a " + q.a + ".";
+      verdict.className = 'verdict ' + (right ? 'yes' : 'no');
+      why.textContent = q.why;
+      next.textContent = st.i === TOTAL - 1 ? "See my score" : "Next question";
+      feedback.hidden = false;
+    } else {
+      feedback.hidden = true;
+    }
+  }
+
+  function showResult(celebrate) {
+    intro.hidden = true; play.hidden = true; result.hidden = false;
+    const perfect = st.score === TOTAL;
+    $('score').textContent = st.score + ' / ' + TOTAL;
+    $('retry').hidden = perfect;
+    $('prize').hidden = !perfect;
+    if (perfect) {
+      $('resultMsg').textContent = "Perfect score. The spirits bow to you.";
+      $('resultSub').textContent = "Make your score card below, then email it to junhee1@ualberta.ca.";
+      $('prize').hidden = false;
+      if (st.name) showCard(); 
+      if (celebrate) confetti();
+    } else {
+      $('resultMsg').textContent = st.score >= 8 ? "So close. The ghosts almost approved." : "The spirits got you this time.";
+      $('resultSub').innerHTML = 'Only perfect scores qualify for the prize. Scroll back up for the answers, then try again. Either way, you are invited to <a href="#iscream">I-Scream House</a>.';
+    }
+  }
+
+  function render() {
+    if (st.done) showResult(false);
+    else if (st.started) showQuestion();
+    else { intro.hidden = false; play.hidden = true; result.hidden = true; }
+  }
+
+  $('start').addEventListener('click', () => { st.started = true; st.tries = (st.tries || 0) + 1; save(st); showQuestion(); statement.focus && statement.focus(); });
+
+  buttons.forEach(b => b.addEventListener('click', () => {
+    if (st.picked || st.done) return;
+    st.picked = b.dataset.answer;
+    if (st.picked === questions[st.i].a) st.score++;
+    save(st);
+    showQuestion();
+    next.focus();
+  }));
+
+  $('retry').addEventListener('click', () => {
+    st = { started: true, i: 0, score: 0, picked: null, done: false, name: st.name || '', code: '', ts: 0, tries: (st.tries || 1) + 1 };
+    save(st);
+    $('nameStep').hidden = false; $('cardStep').hidden = true;
+    showQuestion();
+    $('quiz').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  next.addEventListener('click', () => {
+    if (!st.picked) return;
+    if (st.i < TOTAL - 1) {
+      st.i++; st.picked = null; save(st); showQuestion();
+    } else {
+      st.done = true;
+      if (st.score === TOTAL) {
+        const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        const r = new Uint32Array(5);
+        (window.crypto || window.msCrypto).getRandomValues(r);
+        st.code = 'BTC-' + Array.from(r, x => chars[x % chars.length]).join('');
+        st.ts = Date.now();
+      }
+      save(st);
+      showResult(true);
+    }
+  });
+
+  // ---------- Confetti ----------
+  function confetti() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const cv = $('confetti'); cv.hidden = false;
+    const ctx = cv.getContext('2d');
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const W = window.innerWidth, H = window.innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr; ctx.scale(dpr, dpr);
+    const emoji = ['🎃', '🦇', '👻', '🍬', '🍭', '🕷️', '🍦'];
+    const colors = ['#F2A03D', '#8C5BA8', '#8FD19E', '#F0E8F5', '#E8871E'];
+    const parts = [];
+    for (let k = 0; k < 110; k++) {
+      const isEmoji = k % 3 === 0;
+      parts.push({
+        x: Math.random() * W, y: -20 - Math.random() * H * 0.6,
+        vx: (Math.random() - 0.5) * 2.2, vy: 2 + Math.random() * 3.5,
+        rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.15,
+        size: isEmoji ? 22 + Math.random() * 14 : 7 + Math.random() * 6,
+        e: isEmoji ? emoji[k % emoji.length] : null,
+        c: colors[k % colors.length], sway: Math.random() * Math.PI * 2
+      });
+    }
+    const start = performance.now();
+    function frame(t) {
+      const el = t - start;
+      ctx.clearRect(0, 0, W, H);
+      ctx.globalAlpha = el > 4200 ? Math.max(0, 1 - (el - 4200) / 800) : 1;
+      for (const p of parts) {
+        p.sway += 0.05; p.x += p.vx + Math.sin(p.sway) * 0.8; p.y += p.vy; p.rot += p.vr;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+        if (p.e) { ctx.font = p.size + 'px serif'; ctx.textAlign = 'center'; ctx.fillText(p.e, 0, 0); }
+        else { ctx.fillStyle = p.c; ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2); }
+        ctx.restore();
+      }
+      if (el < 5000) requestAnimationFrame(frame);
+      else { ctx.clearRect(0, 0, W, H); cv.hidden = true; }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // ---------- Score card ----------
+  let cardCanvas = null;
+  async function drawCard() {
+    try { await document.fonts.ready; } catch (e) {}
+    const c = document.createElement('canvas');
+    c.width = 1080; c.height = 1350;
+    const g = c.getContext('2d');
+    const sky = g.createLinearGradient(0, 0, 0, 1350);
+    sky.addColorStop(0, '#110918'); sky.addColorStop(1, '#3B2149');
+    g.fillStyle = sky; g.fillRect(0, 0, 1080, 1350);
+    g.fillStyle = '#F3E9C9';
+    const stars = [[90,90],[250,60],[400,150],[620,70],[180,260],[980,420],[60,520],[1010,700],[120,900],[960,1000]];
+    stars.forEach(([x, y]) => { g.beginPath(); g.arc(x, y, 3, 0, Math.PI * 2); g.fill(); });
+    g.beginPath(); g.arc(860, 210, 110, 0, Math.PI * 2); g.fill();
+    g.fillStyle = '#E2D5AE';
+    [[825, 180, 20], [900, 255, 28], [895, 160, 11]].forEach(([x, y, r]) => { g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fill(); });
+
+    g.textAlign = 'center';
+    g.font = '120px serif'; g.fillText('🎃', 540, 360);
+    g.fillStyle = '#C09AE0';
+    g.font = '700 84px "Grenze Gotisch", Georgia, serif';
+    g.fillText('Myth or Fact?', 540, 480);
+    g.fillStyle = '#F2A03D';
+    g.font = '700 250px "Grenze Gotisch", Georgia, serif';
+    g.fillText(TOTAL + ' / ' + TOTAL, 540, 770);
+    g.fillStyle = '#F0E8F5';
+    g.font = '700 58px "Alegreya Sans", system-ui, sans-serif';
+    g.fillText('Halloween History Master', 540, 860);
+    g.font = '800 76px "Alegreya Sans", system-ui, sans-serif';
+    let nm = st.name; 
+    while (g.measureText(nm).width > 940 && nm.length > 3) nm = nm.slice(0, -1);
+    g.fillText(nm, 540, 990);
+    const d = new Date(st.ts);
+    g.fillStyle = '#BBA9C8';
+    g.font = '400 42px "Alegreya Sans", system-ui, sans-serif';
+    g.fillText('Completed ' + d.toLocaleString('en-CA', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) + '  |  Try #' + (st.tries || 1), 540, 1060);
+
+    g.strokeStyle = '#F2A03D'; g.lineWidth = 4; g.setLineDash([16, 12]);
+    g.strokeRect(290, 1110, 500, 90);
+    g.setLineDash([]);
+    g.fillStyle = '#F2A03D';
+    g.font = '800 48px "Alegreya Sans", system-ui, sans-serif';
+    g.fillText(st.code, 540, 1172);
+
+    g.fillStyle = '#F0E8F5';
+    g.font = '700 38px "Alegreya Sans", system-ui, sans-serif';
+    g.fillText('Email to junhee1@ualberta.ca  |  First 3 win', 540, 1262);
+    g.fillStyle = '#BBA9C8';
+    g.font = '400 32px "Alegreya Sans", system-ui, sans-serif';
+    g.fillText('Before the Candy  |  Floor 6  |  I-Scream House, Oct 30', 540, 1316);
+    return c;
+  }
+
+  async function showCard() {
+    $('nameStep').hidden = true;
+    $('cardStep').hidden = false;
+    cardCanvas = await drawCard();
+    $('cardImg').src = cardCanvas.toDataURL('image/png');
+  }
+
+  $('make').addEventListener('click', () => {
+    const v = $('name').value.trim();
+    if (!v) { $('name').focus(); $('name').placeholder = 'Please enter your name first'; return; }
+    st.name = v; save(st);
+    showCard();
+  });
+
+  // Download through the viewer's save prompt when available
+  let downloads = null;
+  (async () => {
+    try {
+      if (window.claude && typeof window.claude.use === 'function') downloads = await window.claude.use('downloads');
+    } catch (e) { downloads = null; }
+    if (downloads) {
+      $('save').hidden = false;
+      $('saveHint').textContent = 'You can also press and hold the image to save it.';
+    }
+  })();
+
+  $('save').addEventListener('click', async () => {
+    if (!downloads || !cardCanvas) return;
+    const btn = $('save');
+    btn.disabled = true;
+    const blob = await new Promise(res => cardCanvas.toBlob(res, 'image/png'));
+    try {
+      await downloads.save({ filename: 'halloween-quiz-perfect-score.png', data: blob });
+      btn.textContent = 'Saved. Now email it to junhee1@ualberta.ca!';
+    } catch (err) {
+      const code = err && err.code;
+      if (code === 'declined') btn.textContent = 'Download my score card';
+      else if (code === 'rate_limited') btn.textContent = 'One moment, then try again';
+      else { btn.hidden = true; $('saveHint').textContent = 'Press and hold the image to save it, or take a screenshot.'; }
+    }
+    btn.disabled = false;
+  });
+
+  render();
+
+  // ---------- Copy email ----------
+  $('copyEmail').addEventListener('click', async () => {
+    const b = $('copyEmail');
+    try { await navigator.clipboard.writeText('junhee1@ualberta.ca'); b.textContent = 'Copied. Paste it in your email app.'; }
+    catch (e) { b.textContent = 'Press and hold the address above to copy'; }
+  });
+
+  // ---------- Passport cards ----------
+  const pcards = document.querySelectorAll('.pcard');
+  const visited = new Set();
+  pcards.forEach((c, n) => c.addEventListener('click', () => {
+    const f = c.classList.toggle('flipped');
+    c.setAttribute('aria-pressed', String(f));
+    if (f && !visited.has(n)) {
+      visited.add(n);
+      document.querySelectorAll('#stamps i').forEach((dot, k) => dot.classList.toggle('on', k < visited.size));
+      $('stampCount').textContent = visited.size + ' of ' + pcards.length + ' stamps';
+      if (visited.size === pcards.length) $('passportDone').hidden = false;
+    }
+  }));
+
+  // ---------- Curtains open when the stage scrolls into view ----------
+  (function () {
+    const stageEl = document.getElementById('stage');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) { stageEl.classList.add('open'); return; }
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { stageEl.classList.add('open'); io.disconnect(); } });
+    }, { threshold: 0.45 });
+    io.observe(stageEl);
+  })();
+
+  // ---------- Countdown ----------
+  const target = Date.parse('2026-10-30T17:00:00-06:00');
+  const act2T = Date.parse('2026-10-30T18:30:00-06:00');
+  const endT = Date.parse('2026-10-30T19:30:00-06:00');
+  const pad = n => String(n).padStart(2, '0');
+  function tick() {
+    const now = Date.now();
+    $('act1').classList.toggle('is-live', now >= target && now < act2T);
+    $('act2').classList.toggle('is-live', now >= act2T && now < endT);
+    if (now >= endT) {
+      $('countdown').hidden = true;
+      $('cdLabel').textContent = 'Thanks for screaming with us!';
+      $('rbCd').textContent = 'See you next year';
+      document.querySelector('.rb-text').textContent = '🍦 I-Scream House';
+      return;
+    }
+    if (now >= target) {
+      $('countdown').hidden = true;
+      $('cdLabel').textContent = 'Happening right now. Get down here!';
+      $('rbCd').textContent = 'Live now';
+      document.querySelector('.rb-text').textContent = '🍦 I-Scream House is';
+      return;
+    }
+    let diff = Math.floor((target - now) / 1000);
+    const d = Math.floor(diff / 86400); diff -= d * 86400;
+    const h = Math.floor(diff / 3600); diff -= h * 3600;
+    const m = Math.floor(diff / 60); const s2 = diff - m * 60;
+    $('cdD').textContent = d; $('cdH').textContent = pad(h); $('cdM').textContent = pad(m); $('cdS').textContent = pad(s2);
+    $('rbCd').textContent = d + 'd ' + pad(h) + 'h ' + pad(m) + 'm';
+  }
+  tick(); setInterval(tick, 1000);
+</script>
+</body>
+</html>
